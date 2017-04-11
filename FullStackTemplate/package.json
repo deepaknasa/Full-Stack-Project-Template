@@ -1,0 +1,22 @@
+{
+  "name": "full-stack-template",
+  "version": "1.0.0",
+  "description": "This template will allow quick setup of full stack project",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp": "^3.9.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "full",
+    "stack",
+    "angular2"
+  ],
+  "author": "Deepak Kumar",
+  "license": "MIT"
+}
