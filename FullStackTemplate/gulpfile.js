@@ -1,11 +1,15 @@
 ﻿/// <binding BeforeBuild='clean, default' Clean='clean' />
 "use strict";
 
-var gulp =      require("gulp"),
-    rimraf =    require("rimraf"),
-    concat =    require("gulp-concat"),
-    cssmin =    require("gulp-cssmin"),
-    uglify =    require("gulp-uglify");
+var gulp    =       require("gulp"),
+    rimraf  =       require("rimraf"),
+    concat  =       require("gulp-concat"),
+    cssmin  =       require("gulp-cssmin"),
+    uglify  =       require("gulp-uglify"),
+    browser =       require('browser-sync').create(),
+    dotnet  =       require('gulp-dotnet'),
+    server;
+
 
 var paths = {
     webroot: "./wwwroot/"
@@ -50,4 +54,24 @@ gulp.task("min:css", function () {
 
 gulp.task("min", ["min:js", "min:css"]);
 
-gulp.task('default', ['clean', 'min']);
+gulp.task('serve', () => {
+    browser.init({
+        startPath: '.',
+        server: {
+            baseDir: '/wwwroot'
+        }
+    });
+});
+
+gulp.task('build:csharp', function (cb) {
+    dotnet.build({ cwd: './' }, cb);
+});
+
+gulp.task('start:api', function (cb) {
+    if (!server) server = new dotnet({ cwd: './' });
+    server.start('run', cb);
+});
+
+gulp.task('dotnet:start', ['build:csharp', 'start:api']);
+
+gulp.task('default', ['clean', 'min', 'dotnet:start']);
