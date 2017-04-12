@@ -2,4 +2,6 @@ node_modules/
 node packages/
 obj/
 Properties/
-bin/*
+bin/
+bin/Debug/
+bin/Debug/netcoreapp1.1
