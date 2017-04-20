@@ -1,25 +1,51 @@
 {
-  "name": "full-stack-template",
+  "name": "angular4_systemjs",
   "version": "1.0.0",
-  "description": "This template will allow quick setup of full stack project",
-  "main": "gulpfile.js",
+  "description": "Angular 4 test using systemjs",
+  "scripts": {
+    "start": "npm run tsc && concurrently \"npm run tsc:w\" \"lite-server\" ",
+    "lint": "tslint wwwroot/app/**/*.ts -t verbose",
+    "lite": "lite-server",
+    "tsc": "tsc",
+    "tsc:w": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "gulp": "^3.9.1"
+    "@angular/common": "~4.0.0",
+    "@angular/compiler": "~4.0.0",
+    "@angular/core": "~4.0.0",
+    "@angular/forms": "~4.0.0",
+    "@angular/http": "~4.0.0",
+    "@angular/platform-browser": "~4.0.0",
+    "@angular/platform-browser-dynamic": "~4.0.0",
+    "@angular/router": "~4.0.0",
+    "systemjs": "0.20.9",
+    "core-js": "^2.4.1",
+    "reflect-metadata": "^0.1.10",
+    "rxjs": "5.2.0",
+    "zone.js": "^0.8.5",
+    "angular-in-memory-web-api": "~0.3.1",
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.1"
   },
   "devDependencies": {
-    "angular": "^1.6.4",
-    "browser-sync": "^2.18.8",
+    "@types/core-js": "^0.9.36",
+    "@types/node": "^7.0.7",
+    "async": "^2.1.5",
+    "concurrently": "^3.4.0",
     "gulp": "^3.9.1",
-    "gulp-dotnet": "^2.0.0"
+    "gulp-clean": "^0.3.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-typescript": "^3.1.5",
+    "gulp-uglify": "^2.1.0",
+    "lite-server": "^2.3.0",
+    "mocha": "^3.2.0",
+    "pump": "^1.0.2",
+    "tslint": "^4.5.1",
+    "typescript": "^2.2.1",
+    "del": "2.2.0"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "full",
-    "stack",
-    "angular2"
-  ],
-  "author": "Deepak Kumar",
-  "license": "MIT"
+  "repository": {}
 }

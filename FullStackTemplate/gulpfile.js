@@ -1,77 +1,32 @@
-﻿/// <binding BeforeBuild='clean, default' Clean='clean' />
-"use strict";
+/// <binding AfterBuild='default' Clean='clean' />
+/*
+This file is the main entry point for defining Gulp tasks and using Gulp plugins.
+Click here to learn more. https://go.microsoft.com/fwlink/?LinkId=518007
+*/
 
-var gulp    =       require("gulp"),
-    rimraf  =       require("rimraf"),
-    concat  =       require("gulp-concat"),
-    cssmin  =       require("gulp-cssmin"),
-    uglify  =       require("gulp-uglify"),
-    browser =       require('browser-sync').create(),
-    dotnet  =       require('gulp-dotnet'),
-    server;
-
+var gulp = require('gulp'),
+    del = require('del');
 
 var paths = {
-    webroot: "./wwwroot/"
+    scripts: ['scripts/**/*.js', 'scripts/**/*.ts', 'scripts/**/*.map'],
+    libs: ['node_modules/core-js/client/shim.min.js',
+        'node_modules/zone.js/dist/zone.js',
+        'node_modules/rxjs/bundles/Rx.js',
+        'node_modules/rxjs/Observable.js',
+        'node_modules/rxjs/operator/toPromise.js',
+        'node_modules/rxjs/observable/PromiseObservable.js',
+        'node_modules/rxjs/Subject.js',
+        'node_modules/systemjs/dist/system.src.js']
 };
 
-paths.js = paths.webroot + "js/**/*.js";
-paths.minJs = paths.webroot + "js/**/*.min.js";
-paths.css = paths.webroot + "css/**/*.css";
-paths.minCss = paths.webroot + "css/**/*.min.css";
-paths.concatJsDest = paths.webroot + "js/site.min.js";
-paths.concatCssDest = paths.webroot + "css/site.min.css";
-
-//Remove existing concatenated js files from destination folder
-gulp.task('clean:js', (callback) => {
-    rimraf(paths.concatJsDest, callback);
+gulp.task('lib', function () {
+    return gulp.src(paths.libs).pipe(gulp.dest('wwwroot/scripts/lib'));
 });
 
-//Clean up existing concatenated css files from destination folder
-gulp.task('clean:css', (callback) => {
-    rimraf(paths.concatCssDest, callback);
+gulp.task('clean', function () {
+    return del(['wwwroot/scripts/**/*']);
 });
 
-//Combine both js and css tasks
-gulp.task('clean', ['clean:js', 'clean:css']);
-
-
-//Minify js files
-gulp.task('min:js', () => {
-    gulp.src([paths.js, "!" + paths.minJs], { base: "." })
-    .pipe(concat(paths.concatJsDest))
-    .pipe(uglify())
-    .pipe(gulp.dest("."));
+gulp.task('default', ['lib'], function () {
+    gulp.src(paths.scripts).pipe(gulp.dest('wwwroot/scripts'))
 });
-
-//Minify css files
-gulp.task("min:css", function () {
-    return gulp.src([paths.css, "!" + paths.minCss])
-        .pipe(concat(paths.concatCssDest))
-        .pipe(cssmin())
-        .pipe(gulp.dest("."));
-});
-
-gulp.task("min", ["min:js", "min:css"]);
-
-gulp.task('serve', () => {
-    browser.init({
-        startPath: '.',
-        server: {
-            baseDir: '/wwwroot'
-        }
-    });
-});
-
-gulp.task('build:csharp', function (cb) {
-    dotnet.build({ cwd: './' }, cb);
-});
-
-gulp.task('start:api', function (cb) {
-    if (!server) server = new dotnet({ cwd: './' });
-    server.start('run', cb);
-});
-
-gulp.task('dotnet:start', ['build:csharp', 'start:api']);
-
-gulp.task('default', ['clean', 'min', 'dotnet:start']);
