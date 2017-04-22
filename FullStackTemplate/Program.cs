@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 
-namespace TestAngular2
+namespace FullStackTemplate
 {
     public class Program
     {
