@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using FullStackTemplate.Data;
 
-namespace AspNetCoreIdentitySample.Data.Migrations
+namespace FullStackTemplate.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("00000000000000_CreateIdentitySchema")]
@@ -127,7 +127,7 @@ namespace AspNetCoreIdentitySample.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("AspNetCoreIdentitySample.Models.ApplicationUser", b =>
+            modelBuilder.Entity("FullStackTemplate.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id");
 
@@ -186,7 +186,7 @@ namespace AspNetCoreIdentitySample.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("AspNetCoreIdentitySample.Models.ApplicationUser")
+                    b.HasOne("FullStackTemplate.Models.ApplicationUser")
                         .WithMany("Claims")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -194,7 +194,7 @@ namespace AspNetCoreIdentitySample.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("AspNetCoreIdentitySample.Models.ApplicationUser")
+                    b.HasOne("FullStackTemplate.Models.ApplicationUser")
                         .WithMany("Logins")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -207,7 +207,7 @@ namespace AspNetCoreIdentitySample.Data.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("AspNetCoreIdentitySample.Models.ApplicationUser")
+                    b.HasOne("FullStackTemplate.Models.ApplicationUser")
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

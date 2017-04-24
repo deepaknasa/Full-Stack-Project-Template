@@ -14,8 +14,8 @@ var AppComponent = (function () {
 }());
 AppComponent = __decorate([
     core_1.Component({
-        selector: 'my-app',
-        template: "<h1>Hello {{name}}</h1>",
+        selector: 'template-app',
+        template: "<div>\n                <ng-content select=\"[dynamic-content]\"></ng-content>\n            </div>",
     })
 ], AppComponent);
 exports.AppComponent = AppComponent;
