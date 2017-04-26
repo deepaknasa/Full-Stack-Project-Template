@@ -64,16 +64,14 @@ namespace FullStackTemplate
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseMvc(routes =>
+            else
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+                app.UseExceptionHandler("/Home/Error");
+            }
 
-            app.UseDefaultFiles();
             app.UseStaticFiles();
+
+            app.UseIdentity();
 
             app.UseFileServer(new FileServerOptions
             {
@@ -82,10 +80,11 @@ namespace FullStackTemplate
                 EnableDirectoryBrowsing = true
             });
 
-            var result = string.IsNullOrEmpty(_testSecret) ? "Null" : "Not Null";
-            app.Run(async (context) =>
+            app.UseMvc(routes =>
             {
-                await context.Response.WriteAsync($"Secret is {result}");
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
