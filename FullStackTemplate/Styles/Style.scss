@@ -1,0 +1,56 @@
+﻿/******************************************************************
+
+Site Name: FullStackTemplate
+Code: Deepak Kumar
+Date: April 2017
+
+******************************************************************/
+
+
+body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+    background-color: #fff;
+}
+
+div.container {
+    min-height: 500px;
+}
+
+.navbar-default {
+    background-color: #f8f8f8;
+    border-color: #e7e7e7;
+}
+
+.navbar-fixed-top {
+    top: 0;
+    border-width: 0 0 1px;
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border-color: #e7e7e7;
+}
+
+.navbar-header {
+    float: left;
+}
+
+#navbar {
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        text-align: center;
+
+        li {
+            display: inline;
+
+            a {
+                text-decoration: none;
+                padding: .2em 1em;
+            }
+        }
+    }
+}

@@ -11,7 +11,16 @@
 	<UserSecretsId>My-USER-SECRET-ID-HERE-c23d27a4-eb88</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Styles\vendor\bootstrap-4.0.0-alpha.6\**" />
+    <Content Remove="Styles\vendor\bootstrap-4.0.0-alpha.6\**" />
+    <EmbeddedResource Remove="Styles\vendor\bootstrap-4.0.0-alpha.6\**" />
+    <None Remove="Styles\vendor\bootstrap-4.0.0-alpha.6\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Remove="wwwroot/js\app\vendor\angular.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Styles\vendor\bootstrap-4.0.0-alpha.6.zip" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />

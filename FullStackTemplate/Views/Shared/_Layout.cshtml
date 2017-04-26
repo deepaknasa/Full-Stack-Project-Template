@@ -4,7 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - FullStackTemplate</title>
-
+    <link href="~/styles/vendor/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/styles/vendor/bootstrap-grid.min.css" rel="stylesheet" />
+    <link href="~/styles/style.css" rel="stylesheet" />
     <!-- Polyfill(s) for older browsers -->
     <script src="~/scripts/lib/shim.min.js"></script>
 
@@ -17,19 +19,24 @@
     </script>
 </head>
 <body>
-    <div dynamic-content>
-        <header>
-            @await Html.PartialAsync("_LoginPartial")
-        </header>
-        <section class="container body-content">
-            @RenderBody()
-        </section>
-        <footer>
-            @await Html.PartialAsync("_FooterPartial")
-        </footer>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div>
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">FullStackTemplate</a>
+            </div>
+            <div id="navbar">
+                @await Html.PartialAsync("_LoginPartial")
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>
+    <div class="container">
+        @RenderBody()
     </div>
+    <footer>
+        @await Html.PartialAsync("_FooterPartial")
+    </footer>
     <template-app>
-        
+
     </template-app>
     <dev>
         @RenderSection("Scripts", required: false)
