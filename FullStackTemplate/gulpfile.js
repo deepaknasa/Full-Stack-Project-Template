@@ -14,8 +14,8 @@ var gulp = require('gulp'),
 
 var paths = {
     scripts: ['scripts/**/*.js', 'scripts/**/*.ts', 'scripts/**/*.map'],
-    styles: ['styles/style.scss', 'styles/vendor/_normalize.scss'],
-    vendor: ['styles/vendor/*.min.css'],
+    styles: ['styles/site.scss'],
+    vendor: ['styles/vendor/*.css'],
     libs: ['node_modules/core-js/client/shim.min.js',
         'node_modules/zone.js/dist/zone.js',
         'node_modules/rxjs/bundles/Rx.js',

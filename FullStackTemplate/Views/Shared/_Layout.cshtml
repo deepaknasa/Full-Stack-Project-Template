@@ -4,9 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - FullStackTemplate</title>
-    <link href="~/styles/vendor/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/styles/vendor/bootstrap-grid.min.css" rel="stylesheet" />
-    <link href="~/styles/style.css" rel="stylesheet" />
+    <link href="~/styles/vendor/bootstrap.css" rel="stylesheet" />
+    <link href="~/styles/site.css" rel="stylesheet" />
     <!-- Polyfill(s) for older browsers -->
     <script src="~/scripts/lib/shim.min.js"></script>
 
@@ -19,14 +18,24 @@
     </script>
 </head>
 <body>
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">FullStackTemplate</a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">FullStackTemplate</a>
             </div>
-            <div id="navbar">
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                </ul>
                 @await Html.PartialAsync("_LoginPartial")
-            </div><!--/.nav-collapse -->
+            </div>
         </div>
     </nav>
     <div class="container">

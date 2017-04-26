@@ -1,0 +1,50 @@
+/******************************************************************
+
+Site Name: FullStackTemplate
+Code: Deepak Kumar
+Date: April 2017
+
+******************************************************************/
+body {
+  padding-top: 50px;
+  padding-bottom: 20px; }
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+  padding-left: 15px;
+  padding-right: 15px; }
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+input,
+select,
+textarea {
+  max-width: 280px; }
+
+/* Carousel */
+.carousel-caption p {
+  font-size: 20px;
+  line-height: 1.4; }
+
+/* buttons and links extension to use brackets: [ click me ] */
+.btn-bracketed::before {
+  display: inline-block;
+  content: "[";
+  padding-right: 0.5em; }
+
+.btn-bracketed::after {
+  display: inline-block;
+  content: "]";
+  padding-left: 0.5em; }
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+  width: 100%; }
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+  /* Hide captions */
+  .carousel-caption {
+    display: none; } }
+
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2l0ZS5jc3MiLCJzb3VyY2VzIjpbInNpdGUuc2NzcyJdLCJzb3VyY2VzQ29udGVudCI6WyIvKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqXHJcblxyXG5TaXRlIE5hbWU6IEZ1bGxTdGFja1RlbXBsYXRlXHJcbkNvZGU6IERlZXBhayBLdW1hclxyXG5EYXRlOiBBcHJpbCAyMDE3XHJcblxyXG4qKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKiovXHJcblxyXG5cclxuYm9keSB7XHJcbiAgICBwYWRkaW5nLXRvcDogNTBweDtcclxuICAgIHBhZGRpbmctYm90dG9tOiAyMHB4O1xyXG59XHJcblxyXG4vKiBXcmFwcGluZyBlbGVtZW50ICovXHJcbi8qIFNldCBzb21lIGJhc2ljIHBhZGRpbmcgdG8ga2VlcCBjb250ZW50IGZyb20gaGl0dGluZyB0aGUgZWRnZXMgKi9cclxuLmJvZHktY29udGVudCB7XHJcbiAgICBwYWRkaW5nLWxlZnQ6IDE1cHg7XHJcbiAgICBwYWRkaW5nLXJpZ2h0OiAxNXB4O1xyXG59XHJcblxyXG4vKiBTZXQgd2lkdGhzIG9uIHRoZSBmb3JtIGlucHV0cyBzaW5jZSBvdGhlcndpc2UgdGhleSdyZSAxMDAlIHdpZGUgKi9cclxuaW5wdXQsXHJcbnNlbGVjdCxcclxudGV4dGFyZWEge1xyXG4gICAgbWF4LXdpZHRoOiAyODBweDtcclxufVxyXG5cclxuLyogQ2Fyb3VzZWwgKi9cclxuLmNhcm91c2VsLWNhcHRpb24gcCB7XHJcbiAgICBmb250LXNpemU6IDIwcHg7XHJcbiAgICBsaW5lLWhlaWdodDogMS40O1xyXG59XHJcblxyXG4vKiBidXR0b25zIGFuZCBsaW5rcyBleHRlbnNpb24gdG8gdXNlIGJyYWNrZXRzOiBbIGNsaWNrIG1lIF0gKi9cclxuLmJ0bi1icmFja2V0ZWQ6OmJlZm9yZSB7XHJcbiAgICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XHJcbiAgICBjb250ZW50OiBcIltcIjtcclxuICAgIHBhZGRpbmctcmlnaHQ6IDAuNWVtO1xyXG59XHJcblxyXG4uYnRuLWJyYWNrZXRlZDo6YWZ0ZXIge1xyXG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xyXG4gICAgY29udGVudDogXCJdXCI7XHJcbiAgICBwYWRkaW5nLWxlZnQ6IDAuNWVtO1xyXG59XHJcblxyXG4vKiBNYWtlIC5zdmcgZmlsZXMgaW4gdGhlIGNhcm91c2VsIGRpc3BsYXkgcHJvcGVybHkgaW4gb2xkZXIgYnJvd3NlcnMgKi9cclxuLmNhcm91c2VsLWlubmVyIC5pdGVtIGltZ1tzcmMkPVwiLnN2Z1wiXSB7XHJcbiAgICB3aWR0aDogMTAwJTtcclxufVxyXG5cclxuLyogSGlkZS9yZWFycmFuZ2UgZm9yIHNtYWxsZXIgc2NyZWVucyAqL1xyXG5AbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA3NjdweCkge1xyXG4gICAgLyogSGlkZSBjYXB0aW9ucyAqL1xyXG4gICAgLmNhcm91c2VsLWNhcHRpb24ge1xyXG4gICAgICAgIGRpc3BsYXk6IG5vbmU7XHJcbiAgICB9XHJcbn1cclxuIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7bUVBTW1FO0FBR25FLEFBQUEsSUFBSSxDQUFDO0VBQ0QsV0FBVyxFQUFFLElBQUk7RUFDakIsY0FBYyxFQUFFLElBQUksR0FDdkI7O0FBRUQsc0JBQXNCO0FBQ3RCLG1FQUFtRTtBQUNuRSxBQUFBLGFBQWEsQ0FBQztFQUNWLFlBQVksRUFBRSxJQUFJO0VBQ2xCLGFBQWEsRUFBRSxJQUFJLEdBQ3RCOztBQUVELHFFQUFxRTtBQUNyRSxBQUFBLEtBQUs7QUFDTCxBQUFBLE1BQU07QUFDTixBQUFBLFFBQVEsQ0FBQztFQUNMLFNBQVMsRUFBRSxLQUFLLEdBQ25COztBQUVELGNBQWM7QUFDZCxBQUFrQixpQkFBRCxDQUFDLENBQUMsQ0FBQztFQUNoQixTQUFTLEVBQUUsSUFBSTtFQUNmLFdBQVcsRUFBRSxHQUFHLEdBQ25COztBQUVELCtEQUErRDtBQUMvRCxBQUFBLGNBQWMsQUFBQSxRQUFRLENBQUM7RUFDbkIsT0FBTyxFQUFFLFlBQVk7RUFDckIsT0FBTyxFQUFFLEdBQUc7RUFDWixhQUFhLEVBQUUsS0FBSyxHQUN2Qjs7QUFFRCxBQUFBLGNBQWMsQUFBQSxPQUFPLENBQUM7RUFDbEIsT0FBTyxFQUFFLFlBQVk7RUFDckIsT0FBTyxFQUFFLEdBQUc7RUFDWixZQUFZLEVBQUUsS0FBSyxHQUN0Qjs7QUFFRCx3RUFBd0U7QUFDeEUsQUFBc0IsZUFBUCxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUEsQUFBQSxHQUFDLEVBQUssTUFBTSxBQUFYLEVBQWE7RUFDbkMsS0FBSyxFQUFFLElBQUksR0FDZDs7QUFFRCx3Q0FBd0M7QUFDeEMsTUFBTSxDQUFDLE1BQU0sTUFBTSxTQUFTLEVBQUUsS0FBSztFQUMvQixtQkFBbUI7RUFDbkIsQUFBQSxpQkFBaUIsQ0FBQztJQUNkLE9BQU8sRUFBRSxJQUFJLEdBQ2hCIn0= */
