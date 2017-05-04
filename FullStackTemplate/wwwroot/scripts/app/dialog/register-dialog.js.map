@@ -1,0 +1,1 @@
+{"version":3,"file":"register-dialog.js","sourceRoot":"","sources":["register-dialog.ts"],"names":[],"mappings":";;;;;;;;;;AAAA,sCAA0C;AAC1C,8CAA0D;AAO1D,IAAa,cAAc;IACvB,wBAAmB,SAAsC;QAAtC,cAAS,GAAT,SAAS,CAA6B;IAAI,CAAC;IAClE,qBAAC;AAAD,CAAC,AAFD,IAEC;AAFY,cAAc;IAJ1B,gBAAS,CAAC;QACP,QAAQ,EAAE,eAAe;QACzB,WAAW,EAAE,yCAAyC;KACzD,CAAC;qCAEgC,sBAAW;GADhC,cAAc,CAE1B;AAFY,wCAAc"}

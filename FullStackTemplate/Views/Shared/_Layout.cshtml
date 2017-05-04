@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - FullStackTemplate</title>
     <link href="~/styles/vendor/bootstrap.css" rel="stylesheet" />
     <link href="~/styles/site.css" rel="stylesheet" />
+    <link href="~/styles/vendor/indigo-pink.css" rel="stylesheet">
     <!-- Polyfill(s) for older browsers -->
     <script src="~/scripts/lib/shim.min.js"></script>
 
@@ -16,6 +17,8 @@
     <script>
         System.import('scripts/main.js').catch(function (err) { console.error(err); });
     </script>
+    @*<link href="https://unpkg.com/@angular/material/prebuilt-themes/indigo-pink.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">*@
 </head>
 <body>
     <!-- Fixed navbar -->
@@ -45,9 +48,6 @@
     <footer>
         @await Html.PartialAsync("_FooterPartial")
     </footer>
-    <template-app>
-
-    </template-app>
     <dev>
         @RenderSection("Scripts", required: false)
     </dev>

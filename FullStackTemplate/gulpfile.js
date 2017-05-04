@@ -16,6 +16,7 @@ var paths = {
     scripts: ['scripts/**/*.js', 'scripts/**/*.ts', 'scripts/**/*.map'],
     styles: ['styles/site.scss'],
     vendor: ['styles/vendor/*.css'],
+    templates: ['templates/**/*.html'],
     libs: ['node_modules/core-js/client/shim.min.js',
         'node_modules/zone.js/dist/zone.js',
         'node_modules/rxjs/bundles/Rx.js',
@@ -28,6 +29,10 @@ var paths = {
 
 gulp.task('lib', function () {
     return gulp.src(paths.libs).pipe(gulp.dest('wwwroot/scripts/lib'));
+});
+
+gulp.task('template', function () {
+    return gulp.src(paths.templates).pipe(gulp.dest('wwwroot/templates'));
 });
 
 gulp.task('clean', function () {
@@ -54,6 +59,6 @@ gulp.task('sass', ['vendor:css'], function () {
         }));
 });
 
-gulp.task('default', ['lib', 'sass'], function () {
+gulp.task('default', ['lib', 'sass', 'template'], function () {
     gulp.src(paths.scripts).pipe(gulp.dest('wwwroot/scripts'))
 });
