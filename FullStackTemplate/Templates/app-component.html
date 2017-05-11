@@ -1,5 +1,5 @@
 ﻿<!-- Fixed navbar -->
-<nav class="navbar navbar-default navbar-fixed-top">
+<!--<nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">My Template</a>
@@ -10,14 +10,51 @@
                 <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                 <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
             </ul>
-            <!--@await Html.PartialAsync("_LoginPartial") -->
+            //@await Html.PartialAsync("_LoginPartial")
             <login-component></login-component>
-        </div><!--/.nav-collapse -->
+        </div>
     </div>
-</nav>
-<div class="container">
-    <!-- Main component for a primary marketing message or call to action -->
-    <div class="jumbotron">
-        <router-outlet></router-outlet>
+</nav>-->
+<md-sidenav-container class="demo-root" fullscreen>
+    <md-sidenav #start>
+        <md-nav-list>
+            <a *ngFor="let navItem of navItems"
+               md-list-item
+               (click)="start.close()"
+               [routerLink]="[navItem.route]">
+                {{navItem.name}}
+            </a>
+            <hr>
+            <a md-list-item
+               (click)="start.close()"
+               [routerLink]="['baseline']">
+                Baseline
+            </a>
+        </md-nav-list>
+        <button md-button (click)="start.close()">CLOSE</button>
+    </md-sidenav>
+    <div>
+        <md-toolbar color="primary">
+            <button md-icon-button (click)="start.open()">
+                <md-icon class="md-24">menu</md-icon>
+            </button>
+            <div class="demo-toolbar">
+                <h1>Fullstack project template</h1>
+                <!--<button md-button (click)="toggleFullscreen()" title="Toggle fullscreen">
+                    Fullscreen
+                </button>-->
+                <!--<button md-button (click)="root.dir = (root.dir == 'rtl' ? 'ltr' : 'rtl')" title="Toggle between RTL and LTR">
+                    {{root.dir.toUpperCase()}}
+                </button>-->
+                <login-component></login-component>
+            </div>
+        </md-toolbar>
     </div>
-</div> <!-- /container -->
+    <div class="container">
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="jumbotron">
+            <router-outlet></router-outlet>
+        </div>
+    </div> <!-- /container -->
+
+</md-sidenav-container>
