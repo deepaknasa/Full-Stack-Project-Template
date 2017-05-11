@@ -1,0 +1,23 @@
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">My Template</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+            </ul>
+            <!--@await Html.PartialAsync("_LoginPartial") -->
+            <login-component></login-component>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+<div class="container">
+    <!-- Main component for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <router-outlet></router-outlet>
+    </div>
+</div> <!-- /container -->

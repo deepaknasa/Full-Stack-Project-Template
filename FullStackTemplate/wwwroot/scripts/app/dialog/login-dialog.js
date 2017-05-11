@@ -14,6 +14,10 @@ var LoginDialog = (function () {
     function LoginDialog(dialogRef) {
         this.dialogRef = dialogRef;
     }
+    LoginDialog.prototype.login = function () {
+        console.log('user is logged in');
+        this.dialogRef.close('Logged in');
+    };
     return LoginDialog;
 }());
 LoginDialog = __decorate([

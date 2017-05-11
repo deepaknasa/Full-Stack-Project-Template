@@ -21,30 +21,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">*@
 </head>
 <body>
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">My Template</a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                </ul>
-                @await Html.PartialAsync("_LoginPartial")
-            </div><!--/.nav-collapse -->
-        </div>
-    </nav>
-    <div class="container">
-        <!-- Main component for a primary marketing message or call to action -->
-        <div class="jumbotron">
-            <h1>Fullstack project template</h1>
-            <p>This template facilitate quicker project setup</p>
-        </div>
-        @RenderBody()
-    </div> <!-- /container -->
+    @RenderBody()
+    <my-app></my-app>
     <footer>
         @await Html.PartialAsync("_FooterPartial")
     </footer>

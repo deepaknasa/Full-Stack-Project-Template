@@ -43,6 +43,10 @@ gulp.task('sass:watch', function () {
     gulp.watch(paths.styles, ['sass']);
 });
 
+gulp.task('app:watch', function () {
+    gulp.watch(paths.scripts, ['default']);
+});
+
 gulp.task('vendor:css', function () {
     return gulp.src(paths.vendor)
         .pipe(gulp.dest('wwwroot/styles/vendor'));
