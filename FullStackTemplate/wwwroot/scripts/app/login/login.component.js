@@ -14,6 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var material_1 = require("@angular/material");
+var index_1 = require("../authentication/index");
 //import { LoginDialog } from '../dialog/login-dialog'
 //import { RegisterDialog } from '../dialog/register-dialog'
 var LoginComponent = (function () {
@@ -31,6 +32,9 @@ var LoginComponent = (function () {
             doc.body.classList.remove('no-scroll');
         });
     }
+    LoginComponent.prototype.ngOnInit = function () {
+        console.log('OnInit');
+    };
     LoginComponent.prototype.openLoginDialog = function () {
         var dialogRef = this.dialog.open(LoginDialog);
         dialogRef.afterClosed().subscribe(function (result) {
@@ -53,15 +57,26 @@ LoginComponent = __decorate([
 ], LoginComponent);
 exports.LoginComponent = LoginComponent;
 var LoginDialog = (function () {
-    function LoginDialog(dialogRef) {
+    function LoginDialog(dialogRef, authenticationService) {
         this.dialogRef = dialogRef;
+        this.authenticationService = authenticationService;
         this.loading = false;
         this.model = {};
+        this.loginError = '';
     }
     LoginDialog.prototype.login = function () {
+        var _this = this;
         this.loading = true;
-        console.log('user is logged in');
-        this.dialogRef.close('Logged in');
+        this.authenticationService.login(this.model.email, this.model.password)
+            .subscribe(function (data) {
+            //this.router.navigate([this.returnUrl]);
+            console.log('user is logged in');
+            _this.dialogRef.close('Logged in');
+        }, function (error) {
+            console.log('login failed');
+            _this.loginError = error;
+            _this.loading = false;
+        });
     };
     return LoginDialog;
 }());
@@ -70,7 +85,7 @@ LoginDialog = __decorate([
         selector: 'login-control',
         templateUrl: './templates/dialog/login-dialog.html',
     }),
-    __metadata("design:paramtypes", [material_1.MdDialogRef])
+    __metadata("design:paramtypes", [material_1.MdDialogRef, index_1.AuthenticationService])
 ], LoginDialog);
 exports.LoginDialog = LoginDialog;
 var RegisterDialog = (function () {

@@ -15,6 +15,8 @@ var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
 var animations_1 = require("@angular/platform-browser/animations");
 var material_1 = require("@angular/material");
+//Authentication service
+var index_1 = require("./authentication/index");
 //Main application component
 var app_component_1 = require("./app.component");
 //Login components
@@ -39,7 +41,10 @@ AppModule = __decorate([
             material_1.MaterialModule,
             animations_1.BrowserAnimationsModule
         ],
-        providers: [{ provide: common_1.APP_BASE_HREF, useValue: '/' }],
+        providers: [
+            { provide: common_1.APP_BASE_HREF, useValue: '/' },
+            index_1.AuthenticationService
+        ],
         declarations: [
             app_component_1.AppComponent,
             app_component_1.Home,

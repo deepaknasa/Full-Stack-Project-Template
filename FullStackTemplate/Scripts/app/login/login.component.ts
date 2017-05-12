@@ -1,6 +1,7 @@
-﻿import { Component, Inject, ViewChild, TemplateRef} from '@angular/core';
+﻿import { Component, OnInit, Inject, ViewChild, TemplateRef} from '@angular/core';
 import { DOCUMENT} from '@angular/platform-browser';
 import { MdDialog, MdDialogRef, MdDialogConfig, MD_DIALOG_DATA} from '@angular/material';
+import { AuthenticationService } from '../authentication/index';
 //import { LoginDialog } from '../dialog/login-dialog'
 //import { RegisterDialog } from '../dialog/register-dialog'
 
@@ -9,7 +10,7 @@ import { MdDialog, MdDialogRef, MdDialogConfig, MD_DIALOG_DATA} from '@angular/m
     selector: 'login-component',
     templateUrl: './templates/login/login-component.html'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
     actionName: string;
     lastCloseResult: string;
     actionsAlignment: string;
@@ -26,6 +27,10 @@ export class LoginComponent {
         dialog.afterAllClosed.subscribe(() => {
             doc.body.classList.remove('no-scroll');
         });
+    }
+
+    ngOnInit() {
+        console.log('OnInit');
     }
 
     openLoginDialog() {
@@ -48,13 +53,24 @@ export class LoginComponent {
 export class LoginDialog {
     loading = false;
     model: any = {};
+    loginError: string = '';
 
-    constructor(public dialogRef: MdDialogRef<LoginDialog>) { }
+    constructor(public dialogRef: MdDialogRef<LoginDialog>, private authenticationService: AuthenticationService) { }
 
     login() {
         this.loading = true;
-        console.log('user is logged in');
-        this.dialogRef.close('Logged in');
+        this.authenticationService.login(this.model.email, this.model.password)
+            .subscribe(
+                data => {
+                    //this.router.navigate([this.returnUrl]);
+                    console.log('user is logged in');
+                    this.dialogRef.close('Logged in');
+                },
+                error => {
+                    console.log('login failed');
+                    this.loginError = error;
+                    this.loading = false;
+                });
     }
 }
 

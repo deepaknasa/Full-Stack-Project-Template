@@ -31,6 +31,7 @@
                         <div class="form-group" md-dialog-actions>
                             <button [disabled]="loading" class="btn btn-primary" md-button>Login</button>
                             <a [routerLink]="['/register']" class="btn btn-link">Register</a>
+                            <div *ngIf="loginForm.submitted && loginError">{{loginError}}</div>
                         </div>
                     </div>
                 </form>
