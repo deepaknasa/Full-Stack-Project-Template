@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
     isLoggeIn: boolean;
     user: string;
     
-    constructor(public dialog: MdDialog, @Inject(DOCUMENT) doc: any) {
+    constructor(public dialog: MdDialog, @Inject(DOCUMENT) doc: any, private authenticationService: AuthenticationService) {
         // Possible useful example for the open and closeAll events.
         // Adding a class to the body if a dialog opens and
         // removing it after all open dialogs are closed
@@ -43,6 +43,11 @@ export class LoginComponent implements OnInit {
             this.user = localStorage.getItem('currentUser');
             console.log('currentUser : ', this.user);
         });
+    }
+
+    logout() {
+        this.authenticationService.logout();
+        this.isLoggeIn = false;       
     }
 
     openRegisterDialog() {

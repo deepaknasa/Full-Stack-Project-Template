@@ -18,8 +18,9 @@ var index_1 = require("../authentication/index");
 //import { LoginDialog } from '../dialog/login-dialog'
 //import { RegisterDialog } from '../dialog/register-dialog'
 var LoginComponent = (function () {
-    function LoginComponent(dialog, doc) {
+    function LoginComponent(dialog, doc, authenticationService) {
         this.dialog = dialog;
+        this.authenticationService = authenticationService;
         // Possible useful example for the open and closeAll events.
         // Adding a class to the body if a dialog opens and
         // removing it after all open dialogs are closed
@@ -45,6 +46,10 @@ var LoginComponent = (function () {
             console.log('currentUser : ', _this.user);
         });
     };
+    LoginComponent.prototype.logout = function () {
+        this.authenticationService.logout();
+        this.isLoggeIn = false;
+    };
     LoginComponent.prototype.openRegisterDialog = function () {
         var dialogRef = this.dialog.open(RegisterDialog);
         dialogRef.afterClosed().subscribe(function (result) {
@@ -58,7 +63,7 @@ LoginComponent = __decorate([
         templateUrl: './templates/login/login-component.html'
     }),
     __param(1, core_1.Inject(platform_browser_1.DOCUMENT)),
-    __metadata("design:paramtypes", [material_1.MdDialog, Object])
+    __metadata("design:paramtypes", [material_1.MdDialog, Object, index_1.AuthenticationService])
 ], LoginComponent);
 exports.LoginComponent = LoginComponent;
 var LoginDialog = (function () {
