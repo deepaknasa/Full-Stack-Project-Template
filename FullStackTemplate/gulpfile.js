@@ -14,7 +14,7 @@ var gulp = require('gulp'),
 
 var paths = {
     scripts: ['scripts/**/*.js', 'scripts/**/*.ts', 'scripts/**/*.map'],
-    styles: ['styles/site.scss'],
+    styles: ['styles/site.scss', 'scripts/**/*.scss'],
     vendor: ['styles/vendor/*.css'],
     templates: ['templates/**/*.html'],
     libs: ['node_modules/core-js/client/shim.min.js',
@@ -57,7 +57,7 @@ gulp.task('sass', ['vendor:css'], function () {
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('wwwroot/styles'))
+        .pipe(gulp.dest('wwwroot/styles/' + paths.styles))
         .pipe(reload({
             stream: true
         }));

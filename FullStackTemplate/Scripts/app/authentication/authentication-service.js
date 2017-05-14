@@ -16,13 +16,16 @@ var AuthenticationService = (function () {
         this.http = http;
     }
     AuthenticationService.prototype.login = function (email, password) {
-        return this.http.post('/Account/Login', JSON.stringify({ model: { email: email, password: password } }))
+        var body = JSON.stringify({ Email: email, Password: password });
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json; charset=utf-8' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return this.http.post('/Account/Login', body, options)
             .map(function (response) {
             // login successful if there's a jwt token in the response
-            var user = response.json();
-            if (user && user.token) {
+            console.log('user response:', response.text());
+            if (response && response.status === 200) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('currentUser', JSON.stringify(user));
+                localStorage.setItem('currentUser', response.text());
             }
         });
     };

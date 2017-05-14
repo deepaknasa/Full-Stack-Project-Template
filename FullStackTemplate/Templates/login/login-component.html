@@ -1,4 +1,12 @@
-﻿<ul class="nav navbar-nav navbar-right">
-    <li><a md-button (click)="openRegisterDialog()">Register</a></li>
-    <li><a md-button (click)="openLoginDialog()">Log in</a></li>
-</ul>
+﻿<div *ngIf="isLoggeIn; else unloggedUser">
+    <ul class="nav navbar-nav navbar-right">
+        <li><a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hello {{user}}</a></li>
+        <li><button type="submit" class="btn btn-link navbar-btn navbar-link">Log out</button></li>
+    </ul>
+</div>
+<template #unloggedUser>
+    <ul class="nav navbar-nav navbar-right">
+        <li><a md-button (click)="openRegisterDialog()">Register</a></li>
+        <li><a md-button (click)="openLoginDialog()">Log in</a></li>
+    </ul>
+</template>

@@ -11,8 +11,7 @@
     <div class="col-md-12">
         <section>
             <form class="form-horizontal" name="form" (ngSubmit)="loginForm.form.valid && login()" #loginForm="ngForm" novalidate>
-                    <div md-dialog-content>
-                        <div asp-validation-summary="All" class="text-danger"></div>
+                    <div md-dialog-content class="dialog-container login-dialog">
                         <div class="form-group" [ngClass]="{ 'has-error': loginForm.submitted && !email.valid }">
                             <label for="email" class="control-label">Email</label>
                             <input type="email" class="form-control" [(ngModel)]="model.email"  name="email" #email="ngModel" required />
@@ -23,15 +22,13 @@
                             <input type="password" class="form-control" [(ngModel)]="model.password" name="password" #password="ngModel" required/>
                             <div *ngIf="loginForm.submitted && !password.valid" class="help-block">Password is required</div>
                         </div>
-                        <!--<div class="form-group" md-dialog-actions>
-                            <div class="col-md-offset-2 col-md-10">
-                                <button class="btn btn-default" md-button (click)="login()">Log in</button>
-                            </div>
-                        </div>-->
+                        <div class="form-group" [ngClass]="{ 'has-error': loginForm.submitted && loginError }">
+                            <div *ngIf="loginForm.submitted && loginError" class="help-block">{{loginError}}</div>
+                        </div>
                         <div class="form-group" md-dialog-actions>
+                            
                             <button [disabled]="loading" class="btn btn-primary" md-button>Login</button>
                             <a [routerLink]="['/register']" class="btn btn-link">Register</a>
-                            <div *ngIf="loginForm.submitted && loginError">{{loginError}}</div>
                         </div>
                     </div>
                 </form>

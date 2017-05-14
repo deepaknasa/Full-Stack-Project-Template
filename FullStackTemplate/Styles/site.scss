@@ -134,3 +134,7 @@ textarea {
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
 }
+
+.dialog-container {
+    overflow: hidden !important;
+}

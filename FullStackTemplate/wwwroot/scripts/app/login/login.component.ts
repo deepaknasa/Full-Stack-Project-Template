@@ -14,6 +14,8 @@ export class LoginComponent implements OnInit {
     actionName: string;
     lastCloseResult: string;
     actionsAlignment: string;
+    isLoggeIn: boolean;
+    user: string;
     
     constructor(public dialog: MdDialog, @Inject(DOCUMENT) doc: any) {
         // Possible useful example for the open and closeAll events.
@@ -31,11 +33,15 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         console.log('OnInit');
+        this.isLoggeIn = false;
     }
 
     openLoginDialog() {
         let dialogRef = this.dialog.open(LoginDialog);
         dialogRef.afterClosed().subscribe(result => {
+            this.isLoggeIn = true;
+            this.user = localStorage.getItem('currentUser');
+            console.log('currentUser : ', this.user);
         });
     }
 
@@ -48,7 +54,7 @@ export class LoginComponent implements OnInit {
 
 @Component({
     selector: 'login-control',
-    templateUrl: './templates/dialog/login-dialog.html',
+    templateUrl: './templates/dialog/login-dialog.html'
 })
 export class LoginDialog {
     loading = false;
@@ -68,7 +74,7 @@ export class LoginDialog {
                 },
                 error => {
                     console.log('login failed');
-                    this.loginError = error;
+                    this.loginError = 'Login failed due to server error. Please try again.';
                     this.loading = false;
                 });
     }

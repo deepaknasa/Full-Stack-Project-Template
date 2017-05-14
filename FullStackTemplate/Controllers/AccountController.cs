@@ -58,8 +58,8 @@ namespace FullStackTemplate.Controllers
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login([FromBody] LoginViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
@@ -70,7 +70,7 @@ namespace FullStackTemplate.Controllers
                 if (result.Succeeded)
                 {
                     _logger.LogInformation(1, "User logged in.");
-                    return RedirectToLocal(returnUrl);
+                    return StatusCode(200, model.Email);
                 }
                 if (result.RequiresTwoFactor)
                 {
@@ -89,7 +89,7 @@ namespace FullStackTemplate.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return StatusCode(500);
         }
 
         //

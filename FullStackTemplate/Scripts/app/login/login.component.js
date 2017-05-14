@@ -34,10 +34,15 @@ var LoginComponent = (function () {
     }
     LoginComponent.prototype.ngOnInit = function () {
         console.log('OnInit');
+        this.isLoggeIn = false;
     };
     LoginComponent.prototype.openLoginDialog = function () {
+        var _this = this;
         var dialogRef = this.dialog.open(LoginDialog);
         dialogRef.afterClosed().subscribe(function (result) {
+            _this.isLoggeIn = true;
+            _this.user = localStorage.getItem('currentUser');
+            console.log('currentUser : ', _this.user);
         });
     };
     LoginComponent.prototype.openRegisterDialog = function () {
@@ -74,7 +79,7 @@ var LoginDialog = (function () {
             _this.dialogRef.close('Logged in');
         }, function (error) {
             console.log('login failed');
-            _this.loginError = error;
+            _this.loginError = 'Login failed due to server error. Please try again.';
             _this.loading = false;
         });
     };
@@ -83,7 +88,7 @@ var LoginDialog = (function () {
 LoginDialog = __decorate([
     core_1.Component({
         selector: 'login-control',
-        templateUrl: './templates/dialog/login-dialog.html',
+        templateUrl: './templates/dialog/login-dialog.html'
     }),
     __metadata("design:paramtypes", [material_1.MdDialogRef, index_1.AuthenticationService])
 ], LoginDialog);
