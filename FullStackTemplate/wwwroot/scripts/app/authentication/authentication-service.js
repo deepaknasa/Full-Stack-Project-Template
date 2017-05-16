@@ -15,8 +15,10 @@ require("rxjs/add/operator/map");
 var AuthenticationService = (function () {
     function AuthenticationService(http) {
         this.http = http;
+        this._currentUserKey = "currentUser";
     }
     AuthenticationService.prototype.login = function (email, password) {
+        var _this = this;
         var body = JSON.stringify({ Email: email, Password: password });
         var headers = new http_1.Headers({ 'Content-Type': 'application/json; charset=utf-8' });
         var options = new http_1.RequestOptions({ headers: headers });
@@ -26,36 +28,44 @@ var AuthenticationService = (function () {
             console.log('user response:', response.text());
             if (response && response.status === 200) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('currentUser', response.text());
+                localStorage.setItem(_this._currentUserKey, response.text());
             }
         });
     };
     AuthenticationService.prototype.logout = function () {
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json; charset=utf-8' });
-        var options = new http_1.RequestOptions({ headers: headers });
-        return this.http.post('/Account/Logout', {}, options)
-            .map(function (response) {
-            // login successful if there's a jwt token in the response
-            console.log('user response:', response.text());
-            if (response && response.status === 200) {
-                // remove user from local storage to log user out
-                localStorage.removeItem('currentUser');
-            }
-        })
-            .catch(function (error) {
-            console.log('error is logout', error);
-            var errMsg;
-            if (error instanceof http_1.Response) {
-                var body = error.json() || '';
-                var err = body.error || JSON.stringify(body);
-                errMsg = error.status + " - " + (error.statusText || '') + " " + err;
-            }
-            else {
-                errMsg = error.message ? error.message : error.toString();
-            }
-            console.error(errMsg);
-            return Observable_1.Observable.throw(errMsg);
-        });
+        var _this = this;
+        //let headers = new Headers({ 'Content-Type': 'application/json; charset=utf-8' });
+        //let options = new RequestOptions({ headers: headers });
+        try {
+            return this.http.post('/Account/Logout', JSON.stringify({}))
+                .map(function (response) {
+                console.log('user response:', response.text());
+                if (response && response.status === 200) {
+                    // remove user from local storage to log user out
+                    localStorage.removeItem(_this._currentUserKey);
+                }
+            })
+                .catch(function (error) {
+                console.log('error is logout', error);
+                var errMsg;
+                if (error instanceof http_1.Response) {
+                    var body = error.json() || '';
+                    var err = body.error || JSON.stringify(body);
+                    errMsg = error.status + " - " + (error.statusText || '') + " " + err;
+                }
+                else {
+                    errMsg = error.message ? error.message : error.toString();
+                }
+                console.error(errMsg);
+                return Observable_1.Observable.throw(errMsg);
+            });
+        }
+        catch (e) {
+            console.log(e);
+        }
+    };
+    AuthenticationService.prototype.getCurrentUser = function () {
+        return localStorage.getItem(this._currentUserKey);
     };
     return AuthenticationService;
 }());

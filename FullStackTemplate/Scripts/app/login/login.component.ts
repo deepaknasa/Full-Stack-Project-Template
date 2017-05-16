@@ -33,21 +33,37 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         console.log('OnInit');
-        this.isLoggeIn = false;
+        this.initLoggedInUser();
     }
 
     openLoginDialog() {
         let dialogRef = this.dialog.open(LoginDialog);
         dialogRef.afterClosed().subscribe(result => {
-            this.isLoggeIn = true;
-            this.user = localStorage.getItem('currentUser');
+            this.initLoggedInUser();   
             console.log('currentUser : ', this.user);
         });
     }
 
+    initLoggedInUser() {
+        this.user = this.authenticationService.getCurrentUser();
+        if (this.user) {
+            this.isLoggeIn = true;
+        } else {
+            this.isLoggeIn = false;
+        }
+    }
+
     logout() {
-        this.authenticationService.logout();
-        this.isLoggeIn = false;       
+        this.authenticationService.logout()
+            .subscribe(
+            data => {
+                console.log('user is logged out');
+            },
+            error => {
+                console.log('logout failed');
+            });
+        this.isLoggeIn = false;
+        this.user = null;
     }
 
     openRegisterDialog() {

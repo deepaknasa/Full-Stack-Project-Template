@@ -13,7 +13,7 @@ var gulp = require('gulp'),
     del = require('del');
 
 var paths = {
-    scripts: ['scripts/**/*.js', 'scripts/**/*.ts', 'scripts/**/*.map'],
+    scripts: ['scripts/app-link/**/*.ts', 'scripts/app-link/**/*.js', 'scripts/app-link/**/*.map', 'scripts/**/*.js', 'scripts/**/*.ts', 'scripts/**/*.map'],
     styles: ['styles/site.scss', 'scripts/**/*.scss'],
     vendor: ['styles/vendor/*.css'],
     templates: ['templates/**/*.html'],
@@ -29,6 +29,10 @@ var paths = {
 
 gulp.task('lib', function () {
     return gulp.src(paths.libs).pipe(gulp.dest('wwwroot/scripts/lib'));
+});
+
+gulp.task('app', function () {
+    return gulp.src(paths.scripts).pipe(gulp.dest('wwwroot/scripts'));
 });
 
 gulp.task('template', function () {
@@ -63,6 +67,6 @@ gulp.task('sass', ['vendor:css'], function () {
         }));
 });
 
-gulp.task('default', ['lib', 'sass', 'template'], function () {
+gulp.task('default', ['lib', 'app', 'sass', 'template'], function () {
     gulp.src(paths.scripts).pipe(gulp.dest('wwwroot/scripts'))
 });

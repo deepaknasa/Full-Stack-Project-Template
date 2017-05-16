@@ -35,20 +35,34 @@ var LoginComponent = (function () {
     }
     LoginComponent.prototype.ngOnInit = function () {
         console.log('OnInit');
-        this.isLoggeIn = false;
+        this.initLoggedInUser();
     };
     LoginComponent.prototype.openLoginDialog = function () {
         var _this = this;
         var dialogRef = this.dialog.open(LoginDialog);
         dialogRef.afterClosed().subscribe(function (result) {
-            _this.isLoggeIn = true;
-            _this.user = localStorage.getItem('currentUser');
+            _this.initLoggedInUser();
             console.log('currentUser : ', _this.user);
         });
     };
+    LoginComponent.prototype.initLoggedInUser = function () {
+        this.user = this.authenticationService.getCurrentUser();
+        if (this.user) {
+            this.isLoggeIn = true;
+        }
+        else {
+            this.isLoggeIn = false;
+        }
+    };
     LoginComponent.prototype.logout = function () {
-        this.authenticationService.logout();
+        this.authenticationService.logout()
+            .subscribe(function (data) {
+            console.log('user is logged out');
+        }, function (error) {
+            console.log('logout failed');
+        });
         this.isLoggeIn = false;
+        this.user = null;
     };
     LoginComponent.prototype.openRegisterDialog = function () {
         var dialogRef = this.dialog.open(RegisterDialog);

@@ -7,3 +7,4 @@ bin/Debug/
 bin/Debug/netcoreapp1.1
 FullStackTemplate.csproj.user
 wwwroot/scripts/app/tt
+Scripts/app-link
