@@ -67,6 +67,6 @@ gulp.task('sass', ['vendor:css'], function () {
         }));
 });
 
-gulp.task('default', ['lib', 'app', 'sass', 'template'], function () {
+gulp.task('default', ['lib', 'app', /*'sass',*/ 'template'], function () {
     gulp.src(paths.scripts).pipe(gulp.dest('wwwroot/scripts'))
 });

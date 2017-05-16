@@ -106,5 +106,10 @@ export class LoginDialog {
     templateUrl: './templates/dialog/register-dialog.html',
 })
 export class RegisterDialog {
+    loading = false;
+    model: any = {};
+
     constructor(public dialogRef: MdDialogRef<RegisterDialog>) { }
+
+    register() { }
 }

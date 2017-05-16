@@ -115,7 +115,10 @@ exports.LoginDialog = LoginDialog;
 var RegisterDialog = (function () {
     function RegisterDialog(dialogRef) {
         this.dialogRef = dialogRef;
+        this.loading = false;
+        this.model = {};
     }
+    RegisterDialog.prototype.register = function () { };
     return RegisterDialog;
 }());
 RegisterDialog = __decorate([
