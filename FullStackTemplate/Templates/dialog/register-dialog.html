@@ -1,33 +1,30 @@
 ﻿<div class="row">
     <h1 md-dialog-title>Register yourself</h1>
-    <div md-dialog-content>Please fill below information to register your account</div>
-    <div md-dialog-actions>
-        <button md-button (click)="dialogRef.close('Option 1')">Option 1</button>
-        <button md-button (click)="dialogRef.close('Option 2')">Option 2</button>
-    </div>
-
-    <h1 md-dialog-title>Register yourself</h1>
     <div class="col-md-12">
         <form class="form-horizontal" name="form" (ngSubmit)="registerForm.form.valid && register()" #registerForm="ngForm" novalidate>
             <div md-dialog-content class="dialog-container register-dialog">
-                <div class="form-group" [ngClass]="{'hass-error': registerForm.submitted && !email.valid}">
+                <!--<div class="form-group" [ngClass]="{'hass-error': registerForm.submitted && !email.valid}">
                     <label for="Email" class="control-label">Email</label>
                     <input type="email" placeholder="Please enter valid email" md-dialof name="Email" class="form-control" [(ngModel)]="model.email" #email="ngModel" required  />
                     <div *ngIf="registerForm.submitted && !email.valid" class="help-block">Email is required</div>
-                </div>
-                <div class="form-group" >
+                </div>-->
+                <div class="form-group">
                     <md-input-container style="width: 100%">
-                        <input mdInput placeholder="First name">
+                        <input type="email" name="Email" mdInput placeholder="Email" [(ngModel)]="model.email" #email="ngModel" required>
                     </md-input-container>
                 </div>
                 <div class="form-group" [ngClass]="{'hass-error': registerForm.submitted && !email.valid}">
-                    <label for="Password" class="control-label">Password</label>
-                    <input type="password" name="Password" class="form-control" [(ngModel)]="model.password" #password="ngModel" required />
+                    <!--<label for="Password" class="control-label">Password</label>-->
+                    <md-input-container style="width: 100%">
+                        <input type="password" name="Password" class="form-control" mdInput placeholder="Password" [(ngModel)]="model.password" #password="ngModel" required />
+                    </md-input-container>
                     <div *ngIf="registerForm.submitted && !password.valid" class="help-block">Password is required</div>
                 </div>
                 <div class="form-group" [ngClass]="{'hass-error': registerForm.submitted && !email.valid}">
-                    <label for="ConfirmPassword" class="control-label">Confirm Password</label>
-                    <input type="password" name="ConfirmPassword" class="form-control" [(ngModel)]="model.confirmPassword" #confirmPassword="ngModel" required />
+                    <!--<label for="ConfirmPassword" class="control-label">Confirm Password</label>-->
+                    <md-input-container style="width: 100%">
+                        <input type="password" name="ConfirmPassword" mdInput placeholder="Confirm Password" class="form-control" [(ngModel)]="model.confirmPassword" #confirmPassword="ngModel" required />
+                    </md-input-container>
                     <div *ngIf="registerForm.submitted && !confirmPassword.valid" class="help-block">Confirm Password is not matching</div>
                 </div>
                 <div class="form-group" md-dialog-actions>

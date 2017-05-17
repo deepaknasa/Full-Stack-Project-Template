@@ -15,6 +15,7 @@ var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var material_1 = require("@angular/material");
 var index_1 = require("../authentication/index");
+var register_1 = require("../models/register");
 //import { LoginDialog } from '../dialog/login-dialog'
 //import { RegisterDialog } from '../dialog/register-dialog'
 var LoginComponent = (function () {
@@ -65,8 +66,11 @@ var LoginComponent = (function () {
         this.user = null;
     };
     LoginComponent.prototype.openRegisterDialog = function () {
+        var _this = this;
         var dialogRef = this.dialog.open(RegisterDialog);
         dialogRef.afterClosed().subscribe(function (result) {
+            _this.initLoggedInUser();
+            console.log('currentUser : ', _this.user);
         });
     };
     return LoginComponent;
@@ -113,12 +117,26 @@ LoginDialog = __decorate([
 ], LoginDialog);
 exports.LoginDialog = LoginDialog;
 var RegisterDialog = (function () {
-    function RegisterDialog(dialogRef) {
+    //model: Register;
+    function RegisterDialog(dialogRef, authenticationService, model) {
         this.dialogRef = dialogRef;
+        this.authenticationService = authenticationService;
+        this.model = model;
         this.loading = false;
-        this.model = {};
     }
-    RegisterDialog.prototype.register = function () { };
+    RegisterDialog.prototype.register = function () {
+        var _this = this;
+        this.loading = true;
+        this.authenticationService.register(this.model)
+            .subscribe(function (data) {
+            //this.router.navigate([this.returnUrl]);
+            console.log('user is logged in');
+            _this.dialogRef.close('Logged in');
+        }, function (error) {
+            console.log('login failed');
+            _this.loading = false;
+        });
+    };
     return RegisterDialog;
 }());
 RegisterDialog = __decorate([
@@ -126,7 +144,7 @@ RegisterDialog = __decorate([
         selector: 'login-control',
         templateUrl: './templates/dialog/register-dialog.html',
     }),
-    __metadata("design:paramtypes", [material_1.MdDialogRef])
+    __metadata("design:paramtypes", [material_1.MdDialogRef, index_1.AuthenticationService, register_1.Register])
 ], RegisterDialog);
 exports.RegisterDialog = RegisterDialog;
 //# sourceMappingURL=login.component.js.map

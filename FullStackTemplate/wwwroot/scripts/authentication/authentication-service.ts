@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
+import { Register } from '../models/register';
 
 @Injectable()
 export class AuthenticationService {
@@ -53,11 +54,28 @@ export class AuthenticationService {
         } catch (e) {
             console.log(e);
         }
-        
-        
     }
 
     getCurrentUser() {
         return localStorage.getItem(this._currentUserKey);
+    }
+
+    register(model: Register) {
+        let body = JSON.stringify({ Email: model.email, Password: model.password, ConfirmPassword: model.confirmPassword });
+        //TO-DO
+        //let body = JSON.stringify({ model });
+        let headers = new Headers({ 'Content-Type': 'application/json; charset=utf-8' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post('/Account/Register', body, options)
+            .map((response: Response) => {
+                // login successful if there's a jwt token in the response
+                console.log('user response:', response.text());
+                if (response && response.status === 200) {
+                    // store user details and jwt token in local storage to keep user logged in between page refreshes
+
+                    localStorage.setItem(this._currentUserKey, response.text());
+                }
+            });
     }
 }

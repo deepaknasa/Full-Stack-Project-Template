@@ -2,6 +2,7 @@ import { Component, OnInit, Inject, ViewChild, TemplateRef} from '@angular/core'
 import { DOCUMENT} from '@angular/platform-browser';
 import { MdDialog, MdDialogRef, MdDialogConfig, MD_DIALOG_DATA} from '@angular/material';
 import { AuthenticationService } from '../authentication/index';
+import { Register } from '../models/register';
 //import { LoginDialog } from '../dialog/login-dialog'
 //import { RegisterDialog } from '../dialog/register-dialog'
 
@@ -69,6 +70,8 @@ export class LoginComponent implements OnInit {
     openRegisterDialog() {
         let dialogRef = this.dialog.open(RegisterDialog);
         dialogRef.afterClosed().subscribe(result => {
+            this.initLoggedInUser();
+            console.log('currentUser : ', this.user);
         });
     }
 }
@@ -107,9 +110,22 @@ export class LoginDialog {
 })
 export class RegisterDialog {
     loading = false;
-    model: any = {};
+    //model: Register;
 
-    constructor(public dialogRef: MdDialogRef<RegisterDialog>) { }
+    constructor(public dialogRef: MdDialogRef<RegisterDialog>, private authenticationService: AuthenticationService, private model: Register) { }
 
-    register() { }
+    register() {
+        this.loading = true;
+        this.authenticationService.register(this.model)
+            .subscribe(
+            data => {
+                //this.router.navigate([this.returnUrl]);
+                console.log('user is logged in');
+                this.dialogRef.close('Logged in');
+            },
+            error => {
+                console.log('login failed');
+                this.loading = false;
+            });
+    }
 }

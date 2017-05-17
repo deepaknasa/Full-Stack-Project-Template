@@ -7,6 +7,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '@angular/material';
 import { MdDialog, MdDialogRef } from '@angular/material';
 
+//models
+import { Register } from './models/register';
+
 //Authentication service
 import { AuthenticationService } from './authentication/index';
 
@@ -28,7 +31,8 @@ import {DEMO_APP_ROUTES} from './routes';
     ],
     providers: [
         {provide: APP_BASE_HREF, useValue : '/' },
-        AuthenticationService
+        AuthenticationService,
+        Register
     ],
     declarations: [
         AppComponent,

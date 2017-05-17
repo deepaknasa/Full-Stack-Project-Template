@@ -67,6 +67,23 @@ var AuthenticationService = (function () {
     AuthenticationService.prototype.getCurrentUser = function () {
         return localStorage.getItem(this._currentUserKey);
     };
+    AuthenticationService.prototype.register = function (model) {
+        var _this = this;
+        var body = JSON.stringify({ Email: model.email, Password: model.password, ConfirmPassword: model.confirmPassword });
+        //TO-DO
+        //let body = JSON.stringify({ model });
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json; charset=utf-8' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return this.http.post('/Account/Register', body, options)
+            .map(function (response) {
+            // login successful if there's a jwt token in the response
+            console.log('user response:', response.text());
+            if (response && response.status === 200) {
+                // store user details and jwt token in local storage to keep user logged in between page refreshes
+                localStorage.setItem(_this._currentUserKey, response.text());
+            }
+        });
+    };
     return AuthenticationService;
 }());
 AuthenticationService = __decorate([
