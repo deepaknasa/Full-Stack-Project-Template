@@ -12,10 +12,13 @@ var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var Observable_1 = require("rxjs/Observable");
 require("rxjs/add/operator/map");
+var index_1 = require("../models/index");
 var AuthenticationService = (function () {
-    function AuthenticationService(http) {
+    function AuthenticationService(http, session) {
         this.http = http;
+        this.session = session;
         this._currentUserKey = "currentUser";
+        this._session = session;
     }
     AuthenticationService.prototype.login = function (model) {
         var _this = this;
@@ -67,6 +70,9 @@ var AuthenticationService = (function () {
     AuthenticationService.prototype.getCurrentUser = function () {
         return localStorage.getItem(this._currentUserKey);
     };
+    AuthenticationService.prototype.isLoggedIn = function () {
+        return !!this.getCurrentUser();
+    };
     AuthenticationService.prototype.register = function (model) {
         var _this = this;
         var body = JSON.stringify({ Email: model.email, Password: model.password, ConfirmPassword: model.confirmPassword });
@@ -84,11 +90,16 @@ var AuthenticationService = (function () {
             }
         });
     };
+    AuthenticationService.prototype.getUserSession = function () {
+        this._session.isLoggedIn = this.isLoggedIn();
+        this._session.userName = this.getCurrentUser();
+        return this._session;
+    };
     return AuthenticationService;
 }());
 AuthenticationService = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http])
+    __metadata("design:paramtypes", [http_1.Http, index_1.Session])
 ], AuthenticationService);
 exports.AuthenticationService = AuthenticationService;
 //# sourceMappingURL=authentication-service.js.map

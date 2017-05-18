@@ -2,7 +2,7 @@
 import { DOCUMENT} from '@angular/platform-browser';
 import { MdDialog, MdDialogRef, MdDialogConfig, MD_DIALOG_DATA} from '@angular/material';
 import { AuthenticationService } from '../authentication/index';
-import { RegisterModel, LoginModel } from '../models/index';
+import { LoginModel } from '../models/index';
 
 
 @Component({
@@ -10,9 +10,9 @@ import { RegisterModel, LoginModel } from '../models/index';
     templateUrl: './templates/login/login-component.html'
 })
 export class LoginComponent implements OnInit {
-    actionName: string;
+    //actionName: string;
     lastCloseResult: string;
-    actionsAlignment: string;
+    //actionsAlignment: string;
     isLoggeIn: boolean;
     user: string;
     
@@ -38,19 +38,19 @@ export class LoginComponent implements OnInit {
     openLoginDialog() {
         let dialogRef = this.dialog.open(LoginDialog);
         dialogRef.afterClosed().subscribe(result => {
-            this.initLoggedInUser();   
+            //this.initLoggedInUser();   
             console.log('currentUser : ', this.user);
         });
     }
 
-    initLoggedInUser() {
-        this.user = this.authenticationService.getCurrentUser();
-        if (this.user) {
-            this.isLoggeIn = true;
-        } else {
-            this.isLoggeIn = false;
-        }
-    }
+    //initLoggedInUser() {
+    //    this.user = this.authenticationService.getCurrentUser();
+    //    if (this.user) {
+    //        this.isLoggeIn = true;
+    //    } else {
+    //        this.isLoggeIn = false;
+    //    }
+    //}
 
     logout() {
         this.authenticationService.logout()
@@ -61,22 +61,15 @@ export class LoginComponent implements OnInit {
             error => {
                 console.log('logout failed');
             });
-        this.isLoggeIn = false;
-        this.user = null;
-    }
-
-    openRegisterDialog() {
-        let dialogRef = this.dialog.open(RegisterDialog);
-        dialogRef.afterClosed().subscribe(result => {
-            this.initLoggedInUser();
-            console.log('currentUser : ', this.user);
-        });
+        //this.isLoggeIn = false;
+        //this.user = null;
     }
 }
 
 @Component({
-    selector: 'login-control',
-    templateUrl: './templates/dialog/login-dialog.html'
+    moduleId: 'login-control'
+    //selector: 'login-control'
+    //templateUrl: './templates/dialog/login-dialog.html'
 })
 export class LoginDialog {
     loading = false;
@@ -98,31 +91,5 @@ export class LoginDialog {
                     this.loginError = 'Login failed due to server error. Please try again.';
                     this.loading = false;
                 });
-    }
-}
-
-@Component({
-    selector: 'login-control',
-    templateUrl: './templates/dialog/register-dialog.html',
-})
-export class RegisterDialog {
-    loading = false;
-    //model: Register;
-
-    constructor(public dialogRef: MdDialogRef<RegisterDialog>, private authenticationService: AuthenticationService, private model: RegisterModel) { }
-
-    register() {
-        this.loading = true;
-        this.authenticationService.register(this.model)
-            .subscribe(
-            data => {
-                //this.router.navigate([this.returnUrl]);
-                console.log('user is logged in');
-                this.dialogRef.close('Logged in');
-            },
-            error => {
-                console.log('login failed');
-                this.loading = false;
-            });
     }
 }

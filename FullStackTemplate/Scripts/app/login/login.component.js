@@ -63,14 +63,6 @@ var LoginComponent = (function () {
         this.isLoggeIn = false;
         this.user = null;
     };
-    LoginComponent.prototype.openRegisterDialog = function () {
-        var _this = this;
-        var dialogRef = this.dialog.open(RegisterDialog);
-        dialogRef.afterClosed().subscribe(function (result) {
-            _this.initLoggedInUser();
-            console.log('currentUser : ', _this.user);
-        });
-    };
     return LoginComponent;
 }());
 LoginComponent = __decorate([
@@ -114,35 +106,4 @@ LoginDialog = __decorate([
     __metadata("design:paramtypes", [material_1.MdDialogRef, index_1.AuthenticationService, index_2.LoginModel])
 ], LoginDialog);
 exports.LoginDialog = LoginDialog;
-var RegisterDialog = (function () {
-    //model: Register;
-    function RegisterDialog(dialogRef, authenticationService, model) {
-        this.dialogRef = dialogRef;
-        this.authenticationService = authenticationService;
-        this.model = model;
-        this.loading = false;
-    }
-    RegisterDialog.prototype.register = function () {
-        var _this = this;
-        this.loading = true;
-        this.authenticationService.register(this.model)
-            .subscribe(function (data) {
-            //this.router.navigate([this.returnUrl]);
-            console.log('user is logged in');
-            _this.dialogRef.close('Logged in');
-        }, function (error) {
-            console.log('login failed');
-            _this.loading = false;
-        });
-    };
-    return RegisterDialog;
-}());
-RegisterDialog = __decorate([
-    core_1.Component({
-        selector: 'login-control',
-        templateUrl: './templates/dialog/register-dialog.html',
-    }),
-    __metadata("design:paramtypes", [material_1.MdDialogRef, index_1.AuthenticationService, index_2.RegisterModel])
-], RegisterDialog);
-exports.RegisterDialog = RegisterDialog;
 //# sourceMappingURL=login.component.js.map

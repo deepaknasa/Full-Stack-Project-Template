@@ -2,12 +2,15 @@
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
-import { RegisterModel, LoginModel } from '../models/index';
+import { RegisterModel, LoginModel, Session } from '../models/index';
 
 @Injectable()
 export class AuthenticationService {
     _currentUserKey: string = "currentUser";
-    constructor(private http: Http) { }
+    _session: Session;
+    constructor(private http: Http, private session: Session) {
+        this._session = session;
+    }
 
     login(model: LoginModel) {
         let body = JSON.stringify({ Email: model.email, Password: model.password, RememberMe: model.rememberMe });
@@ -60,6 +63,10 @@ export class AuthenticationService {
         return localStorage.getItem(this._currentUserKey);
     }
 
+    isLoggedIn() {
+        return !!this.getCurrentUser();
+    }
+
     register(model: RegisterModel) {
         let body = JSON.stringify({ Email: model.email, Password: model.password, ConfirmPassword: model.confirmPassword });
         //TO-DO
@@ -77,5 +84,11 @@ export class AuthenticationService {
                     localStorage.setItem(this._currentUserKey, response.text());
                 }
             });
+    }
+
+    getUserSession(): Session {
+        this._session.isLoggedIn = this.isLoggedIn();
+        this._session.userName = this.getCurrentUser();
+        return this._session;
     }
 }

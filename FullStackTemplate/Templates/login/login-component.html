@@ -6,7 +6,7 @@
 </div>
 <template #unloggedUser>
     <ul class="nav navbar-nav navbar-right">
-        <li><a md-button (click)="openRegisterDialog()">Register</a></li>
-        <li><a md-button (click)="openLoginDialog()">Log in</a></li>
+        <li><a md-button [routerLink]="['/register']">Register</a></li><!--(click)="openRegisterDialog()"-->
+        <li><a md-button [routerLink]="['/login']">Log in</a></li><!--(click)="openLoginDialog()"-->
     </ul>
 </template>
