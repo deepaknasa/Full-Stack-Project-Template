@@ -2,15 +2,15 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
-import { Register } from '../models/register';
+import { RegisterModel, LoginModel } from '../models/index';
 
 @Injectable()
 export class AuthenticationService {
     _currentUserKey: string = "currentUser";
     constructor(private http: Http) { }
 
-    login(email: string, password: string) {
-        let body = JSON.stringify({ Email: email, Password: password });
+    login(model: LoginModel) {
+        let body = JSON.stringify({ Email: model.email, Password: model.password, RememberMe: model.rememberMe });
         let headers = new Headers({ 'Content-Type': 'application/json; charset=utf-8' });
         let options = new RequestOptions({ headers: headers });
 
@@ -60,7 +60,7 @@ export class AuthenticationService {
         return localStorage.getItem(this._currentUserKey);
     }
 
-    register(model: Register) {
+    register(model: RegisterModel) {
         let body = JSON.stringify({ Email: model.email, Password: model.password, ConfirmPassword: model.confirmPassword });
         //TO-DO
         //let body = JSON.stringify({ model });

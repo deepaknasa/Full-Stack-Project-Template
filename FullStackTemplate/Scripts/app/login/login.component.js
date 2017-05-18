@@ -15,9 +15,7 @@ var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var material_1 = require("@angular/material");
 var index_1 = require("../authentication/index");
-var register_1 = require("../models/register");
-//import { LoginDialog } from '../dialog/login-dialog'
-//import { RegisterDialog } from '../dialog/register-dialog'
+var index_2 = require("../models/index");
 var LoginComponent = (function () {
     function LoginComponent(dialog, doc, authenticationService) {
         this.dialog = dialog;
@@ -85,17 +83,17 @@ LoginComponent = __decorate([
 ], LoginComponent);
 exports.LoginComponent = LoginComponent;
 var LoginDialog = (function () {
-    function LoginDialog(dialogRef, authenticationService) {
+    function LoginDialog(dialogRef, authenticationService, model) {
         this.dialogRef = dialogRef;
         this.authenticationService = authenticationService;
+        this.model = model;
         this.loading = false;
-        this.model = {};
         this.loginError = '';
     }
     LoginDialog.prototype.login = function () {
         var _this = this;
         this.loading = true;
-        this.authenticationService.login(this.model.email, this.model.password)
+        this.authenticationService.login(this.model)
             .subscribe(function (data) {
             //this.router.navigate([this.returnUrl]);
             console.log('user is logged in');
@@ -113,7 +111,7 @@ LoginDialog = __decorate([
         selector: 'login-control',
         templateUrl: './templates/dialog/login-dialog.html'
     }),
-    __metadata("design:paramtypes", [material_1.MdDialogRef, index_1.AuthenticationService])
+    __metadata("design:paramtypes", [material_1.MdDialogRef, index_1.AuthenticationService, index_2.LoginModel])
 ], LoginDialog);
 exports.LoginDialog = LoginDialog;
 var RegisterDialog = (function () {
@@ -144,7 +142,7 @@ RegisterDialog = __decorate([
         selector: 'login-control',
         templateUrl: './templates/dialog/register-dialog.html',
     }),
-    __metadata("design:paramtypes", [material_1.MdDialogRef, index_1.AuthenticationService, register_1.Register])
+    __metadata("design:paramtypes", [material_1.MdDialogRef, index_1.AuthenticationService, index_2.RegisterModel])
 ], RegisterDialog);
 exports.RegisterDialog = RegisterDialog;
 //# sourceMappingURL=login.component.js.map

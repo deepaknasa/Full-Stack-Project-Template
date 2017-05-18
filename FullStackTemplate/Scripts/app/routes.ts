@@ -4,8 +4,8 @@ import { LoginComponent, LoginDialog, RegisterDialog } from './login/login.compo
 
 export const DEMO_APP_ROUTES: Routes = [
   {path: '', component: Home},
-  {path: 'login', component: LoginDialog},
-  //{path: 'register', component: Home},
+  { path: 'login', component: LoginDialog },
+  { path: 'register', component: RegisterDialog },
   //{path: '', component: Home},
 /*  {path: 'autocomplete', component: AutocompleteDemo},
   {path: 'button', component: ButtonDemo},

@@ -8,7 +8,7 @@ import { MaterialModule } from '@angular/material';
 import { MdDialog, MdDialogRef } from '@angular/material';
 
 //models
-import { Register } from './models/register';
+import { RegisterModel, LoginModel } from './models/index';
 
 //Authentication service
 import { AuthenticationService } from './authentication/index';
@@ -32,7 +32,8 @@ import {DEMO_APP_ROUTES} from './routes';
     providers: [
         {provide: APP_BASE_HREF, useValue : '/' },
         AuthenticationService,
-        Register
+        RegisterModel,
+        LoginModel
     ],
     declarations: [
         AppComponent,

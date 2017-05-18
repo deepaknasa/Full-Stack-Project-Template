@@ -2,9 +2,7 @@
 import { DOCUMENT} from '@angular/platform-browser';
 import { MdDialog, MdDialogRef, MdDialogConfig, MD_DIALOG_DATA} from '@angular/material';
 import { AuthenticationService } from '../authentication/index';
-import { Register } from '../models/register';
-//import { LoginDialog } from '../dialog/login-dialog'
-//import { RegisterDialog } from '../dialog/register-dialog'
+import { RegisterModel, LoginModel } from '../models/index';
 
 
 @Component({
@@ -82,14 +80,13 @@ export class LoginComponent implements OnInit {
 })
 export class LoginDialog {
     loading = false;
-    model: any = {};
     loginError: string = '';
 
-    constructor(public dialogRef: MdDialogRef<LoginDialog>, private authenticationService: AuthenticationService) { }
+    constructor(public dialogRef: MdDialogRef<LoginDialog>, private authenticationService: AuthenticationService, private model: LoginModel) { }
 
     login() {
         this.loading = true;
-        this.authenticationService.login(this.model.email, this.model.password)
+        this.authenticationService.login(this.model)
             .subscribe(
                 data => {
                     //this.router.navigate([this.returnUrl]);
@@ -112,7 +109,7 @@ export class RegisterDialog {
     loading = false;
     //model: Register;
 
-    constructor(public dialogRef: MdDialogRef<RegisterDialog>, private authenticationService: AuthenticationService, private model: Register) { }
+    constructor(public dialogRef: MdDialogRef<RegisterDialog>, private authenticationService: AuthenticationService, private model: RegisterModel) { }
 
     register() {
         this.loading = true;

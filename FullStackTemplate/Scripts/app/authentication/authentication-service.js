@@ -17,9 +17,9 @@ var AuthenticationService = (function () {
         this.http = http;
         this._currentUserKey = "currentUser";
     }
-    AuthenticationService.prototype.login = function (email, password) {
+    AuthenticationService.prototype.login = function (model) {
         var _this = this;
-        var body = JSON.stringify({ Email: email, Password: password });
+        var body = JSON.stringify({ Email: model.email, Password: model.password, RememberMe: model.rememberMe });
         var headers = new http_1.Headers({ 'Content-Type': 'application/json; charset=utf-8' });
         var options = new http_1.RequestOptions({ headers: headers });
         return this.http.post('/Account/Login', body, options)
