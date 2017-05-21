@@ -1,11 +1,12 @@
 ﻿import {Routes} from '@angular/router';
-import {Home} from './app.component';
-import { LoginComponent, LoginDialog, RegisterDialog } from './login/index';
+import { Home } from './app-component';
+import { LoginComponent, RegisterComponent, LogoutComponent } from './login/index';
 
 export const DEMO_APP_ROUTES: Routes = [
   {path: '', component: Home},
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterDialog },
+  { path: 'logout', component: LogoutComponent },
+  { path: 'register', component: RegisterComponent },
   //{path: '', component: Home},
 /*  {path: 'autocomplete', component: AutocompleteDemo},
   {path: 'button', component: ButtonDemo},

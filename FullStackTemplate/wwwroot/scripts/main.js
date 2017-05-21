@@ -5,11 +5,11 @@ var platform_browser_dynamic_1 = require("@angular/platform-browser-dynamic");
 //import { NgModule } from '@angular/core';
 //import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //import { MaterialModule } from '@angular/material';
-//import { LoginComponent } from './app/login/login.component';
+//import { LoginComponent } from './app/login/login-component';
 //import { LoginDialog } from './app/dialog/login-dialog'
 //import { RegisterDialog } from './app/dialog/register-dialog'
 //Main application module
-var app_module_1 = require("./app/app.module");
+var app_module_1 = require("./app/app-module");
 //@NgModule({
 //    imports: [
 //        BrowserModule,

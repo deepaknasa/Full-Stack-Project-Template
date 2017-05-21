@@ -6,12 +6,12 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 //import { MaterialModule } from '@angular/material';
 
 
-//import { LoginComponent } from './app/login/login.component';
+//import { LoginComponent } from './app/login/login-component';
 //import { LoginDialog } from './app/dialog/login-dialog'
 //import { RegisterDialog } from './app/dialog/register-dialog'
 
 //Main application module
-import { AppModule } from './app/app.module';
+import { AppModule } from './app/app-module';
 
 
 //@NgModule({

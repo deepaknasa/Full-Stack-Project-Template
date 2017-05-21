@@ -1,4 +1,4 @@
 ﻿export class Session {
-    isLoggedIn: boolean,
-    userName: string
+    isLoggedIn: boolean;
+    userName: string;
 }

@@ -13,7 +13,16 @@ var gulp = require('gulp'),
     del = require('del');
 
 var paths = {
-    scripts: ['scripts/app-link/**/*.ts', 'scripts/app-link/**/*.js', 'scripts/app-link/**/*.map', 'scripts/**/*.js', 'scripts/**/*.ts', 'scripts/**/*.map'],
+    appScripts: ['scripts/app-link/**/*.ts',
+        'scripts/app-link/**/*.js',
+        'scripts/app-link/**/*.map'
+    ],
+    scripts: [
+        'scripts/main.js',
+        'scripts/main.ts',
+        'scripts/systemjs.config.js',
+        'scripts/systemjs-angular-loader.js'
+    ],
     styles: ['styles/site.scss', 'scripts/**/*.scss'],
     vendor: ['styles/vendor/*.css'],
     templates: ['templates/**/*.html'],
@@ -27,12 +36,16 @@ var paths = {
         'node_modules/systemjs/dist/system.src.js']
 };
 
-gulp.task('lib', function () {
+gulp.task('lib', ['clean'], function () {
     return gulp.src(paths.libs).pipe(gulp.dest('wwwroot/scripts/lib'));
 });
 
-gulp.task('app', function () {
+gulp.task('app:main', function () {
     return gulp.src(paths.scripts).pipe(gulp.dest('wwwroot/scripts'));
+});
+
+gulp.task('app', ['app:main'], function () {
+    return gulp.src(paths.appScripts).pipe(gulp.dest('wwwroot/scripts/app'));
 });
 
 gulp.task('template', function () {
@@ -40,15 +53,15 @@ gulp.task('template', function () {
 });
 
 gulp.task('clean', function () {
-    return del(['wwwroot/scripts/**/*']);
+    return del(['wwwroot/**/*']);
 });
 
 gulp.task('sass:watch', function () {
-    gulp.watch(paths.styles, ['sass']);
+    return gulp.watch(paths.styles, ['sass']);
 });
 
 gulp.task('app:watch', function () {
-    gulp.watch(paths.scripts, ['default']);
+    return gulp.watch(paths.scripts, ['default']);
 });
 
 gulp.task('vendor:css', function () {
@@ -61,12 +74,14 @@ gulp.task('sass', ['vendor:css'], function () {
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('wwwroot/styles/' + paths.styles))
-        .pipe(reload({
-            stream: true
-        }));
+        .pipe(gulp.dest('wwwroot/styles/'));
+        //.pipe(reload({
+        //    stream: true
+        //}));
 });
 
-gulp.task('default', ['lib', 'app', /*'sass',*/ 'template'], function () {
-    gulp.src(paths.scripts).pipe(gulp.dest('wwwroot/scripts'))
+gulp.task('default', ['clean'], function () {
+    gulp.start(['lib', 'app', 'sass', 'template'])
+        .src(paths.scripts)
+        .pipe(gulp.dest('wwwroot/scripts'))
 });
