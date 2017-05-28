@@ -14,11 +14,14 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var material_1 = require("@angular/material");
+var router_1 = require("@angular/router");
 var index_1 = require("../auth/index");
 var index_2 = require("../models/index");
 var LoginComponent = (function () {
-    function LoginComponent(dialog, doc, authenticationService) {
+    function LoginComponent(dialog, doc, router, authenticationService) {
+        var _this = this;
         this.dialog = dialog;
+        this.router = router;
         this.authenticationService = authenticationService;
         // Possible useful example for the open and closeAll events.
         // Adding a class to the body if a dialog opens and
@@ -30,6 +33,7 @@ var LoginComponent = (function () {
         });
         this.dialog.afterAllClosed.subscribe(function () {
             doc.body.classList.remove('no-scroll');
+            _this.router.navigate(['./']);
         });
     }
     LoginComponent.prototype.ngOnInit = function () {
@@ -37,9 +41,11 @@ var LoginComponent = (function () {
         this.openLoginDialog();
     };
     LoginComponent.prototype.openLoginDialog = function () {
+        var _this = this;
         var dialogRef = this.dialog.open(LoginDialog);
         dialogRef.afterClosed().subscribe(function (result) {
             //this.initLoggedInUser();   
+            _this.router.navigate(['./']);
         });
     };
     return LoginComponent;
@@ -50,7 +56,8 @@ LoginComponent = __decorate([
         template: ''
     }),
     __param(1, core_1.Inject(platform_browser_1.DOCUMENT)),
-    __metadata("design:paramtypes", [material_1.MdDialog, Object, index_1.AuthenticationService])
+    __metadata("design:paramtypes", [material_1.MdDialog, Object, router_1.Router,
+        index_1.AuthenticationService])
 ], LoginComponent);
 exports.LoginComponent = LoginComponent;
 var LogoutComponent = (function () {

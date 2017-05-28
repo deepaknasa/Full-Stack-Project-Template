@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, ViewChild, TemplateRef} from '@angular/core';
 import { DOCUMENT} from '@angular/platform-browser';
-import { MdDialog, MdDialogRef, MdDialogConfig, MD_DIALOG_DATA} from '@angular/material';
+import { MdDialog, MdDialogRef, MdDialogConfig, MD_DIALOG_DATA } from '@angular/material';
+import { Router } from '@angular/router';
 import { AuthenticationService } from '../auth/index';
 import { LoginModel } from '../models/index';
 
@@ -13,6 +14,7 @@ export class LoginComponent implements OnInit {
     lastCloseResult: string;
 
     constructor(public dialog: MdDialog, @Inject(DOCUMENT) doc: any,
+        private router: Router,
         private authenticationService: AuthenticationService) {
         // Possible useful example for the open and closeAll events.
         // Adding a class to the body if a dialog opens and
@@ -24,6 +26,7 @@ export class LoginComponent implements OnInit {
         });
         this.dialog.afterAllClosed.subscribe(() => {
             doc.body.classList.remove('no-scroll');
+            this.router.navigate(['./']);
         });
     }
 
@@ -36,6 +39,7 @@ export class LoginComponent implements OnInit {
         let dialogRef = this.dialog.open(LoginDialog);
         dialogRef.afterClosed().subscribe(result => {
             //this.initLoggedInUser();   
+            this.router.navigate(['./']);
         });
 
     }

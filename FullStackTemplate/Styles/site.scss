@@ -15,6 +15,10 @@ body {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
+
+	input:focus, a:focus {
+		outline: none;
+	}
 }
 
 .fl-right {
@@ -79,7 +83,7 @@ header {
         }
 
         input:focus {
-            outline: none;
+            /*outline: none;*/
         }
     }
 }
