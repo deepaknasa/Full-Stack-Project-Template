@@ -4,7 +4,8 @@ import { Session } from '../models/index';
 
 @Component({
     selector: 'auth-component',
-    templateUrl: './templates/auth/auth-component.html'
+    templateUrl: './templates/auth/auth-component.html',
+    styleUrls: ['styles/app/auth/auth-style.css']
 })
 export class AuthComponent implements OnInit {
     _session: Session;

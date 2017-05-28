@@ -12,11 +12,14 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     del = require('del');
 
+const vendorPath = 'styles/vendor/';
+
 var paths = {
     appScripts: ['scripts/app-link/**/*.ts',
         'scripts/app-link/**/*.js',
         'scripts/app-link/**/*.map'
     ],
+    appStyles: ['scripts/app-link/**/*.scss'],
     scripts: [
         'scripts/main.js',
         'scripts/main.ts',
@@ -24,7 +27,9 @@ var paths = {
         'scripts/systemjs-angular-loader.js'
     ],
     styles: ['styles/site.scss', 'scripts/**/*.scss'],
-    vendor: ['styles/vendor/*.css'],
+    vendor: [vendorPath + '*.css'],
+    fa_css: [vendorPath + 'css/font-awesome.min.css'],
+    fa_font: [vendorPath + 'fonts/FontAwesome.otf', vendorPath + 'fonts/fontawesome-webfont.eot', vendorPath + 'fonts/fontawesome-webfont.svg', vendorPath + 'fonts/fontawesome-webfont.ttf', vendorPath + 'fonts/fontawesome-webfont.woff', vendorPath + 'fonts/fontawesome-webfont.woff2'],
     templates: ['templates/**/*.html'],
     libs: ['node_modules/core-js/client/shim.min.js',
         'node_modules/zone.js/dist/zone.js',
@@ -56,21 +61,39 @@ gulp.task('clean', function () {
     return del(['wwwroot/**/*']);
 });
 
+gulp.task('template:watch', function () {
+    return gulp.watch(paths.templates, ['template']);
+});
+
 gulp.task('sass:watch', function () {
     return gulp.watch(paths.styles, ['sass']);
 });
 
-gulp.task('app:watch', function () {
-    return gulp.watch(paths.scripts, ['default']);
+gulp.task('script:watch', function () {
+    return gulp.watch(paths.appScripts, ['app']);
 });
 
-gulp.task('vendor:css', function () {
+gulp.task('watch', function () {
+    return gulp.start('default', 'sass:watch', 'template:watch', 'script:watch');
+});
+
+gulp.task('fa:font', function () {
+    return gulp.src(paths.fa_font)
+        .pipe(gulp.dest('wwwroot/styles/vendor/fonts'));
+});
+
+gulp.task('fa:css', function () {
+    return gulp.src(paths.fa_css)
+        .pipe(gulp.dest('wwwroot/styles/vendor/css'));
+});
+
+gulp.task('vendor:css', ['fa:font', 'fa:css'], function () {
     return gulp.src(paths.vendor)
         .pipe(gulp.dest('wwwroot/styles/vendor'));
 });
 
 gulp.task('sass', ['vendor:css'], function () {
-    return gulp.src(paths.styles)
+    return gulp.src(paths.styles.concat(paths.appStyles))
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
         .pipe(sourcemaps.write())

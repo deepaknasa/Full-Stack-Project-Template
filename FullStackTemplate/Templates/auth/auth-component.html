@@ -1,12 +1,12 @@
 ﻿<div *ngIf="_session.isLoggedIn; else unloggedUser">
-    <ul class="nav navbar-nav navbar-right">
-        <li><a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hello {{_session.userName}}</a></li>
-        <li><button type="button" class="btn btn-link navbar-btn navbar-link" [routerLink]="['/logout']">Log out</button></li>
+    <ul class="">
+        <li><a>Hello {{_session.userName}}</a></li>
+        <li><button type="button" class="btn btn-link navbar-btn navbar-link" [routerLink]="['/logout']"><i class="fa fa-sign-out" aria-hidden="true"></i></button></li>
     </ul>
 </div>
-<template #unloggedUser>
-    <ul class="nav navbar-nav navbar-right">
-        <li><a md-button [routerLink]="['/register']">Register</a></li><!--(click)="openRegisterDialog()"-->
-        <li><a md-button [routerLink]="['/login']">Log in</a></li><!--(click)="openLoginDialog()"-->
+<ng-template #unloggedUser>
+    <ul class="login-btn">
+        <!--<li><a md-button [routerLink]="['/register']">Register</a></li>-->
+        <li><a [routerLink]="['/login']"><i class="fa fa-sign-in" aria-hidden="true"></i></a></li><!--(click)="openLoginDialog()"-->
     </ul>
-</template>
+</ng-template>

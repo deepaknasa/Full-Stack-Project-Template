@@ -11,17 +11,18 @@ import { LoginModel } from '../models/index';
 })
 export class LoginComponent implements OnInit {
     lastCloseResult: string;
-    
-    constructor(public dialog: MdDialog, @Inject(DOCUMENT) doc: any, private authenticationService: AuthenticationService) {
+
+    constructor(public dialog: MdDialog, @Inject(DOCUMENT) doc: any,
+        private authenticationService: AuthenticationService) {
         // Possible useful example for the open and closeAll events.
         // Adding a class to the body if a dialog opens and
         // removing it after all open dialogs are closed
-        dialog.afterOpen.subscribe((ref: MdDialogRef<any>) => {
+        this.dialog.afterOpen.subscribe((ref: MdDialogRef<any>) => {
             if (!doc.body.classList.contains('no-scroll')) {
             doc.body.classList.add('no-scroll');
             }
         });
-        dialog.afterAllClosed.subscribe(() => {
+        this.dialog.afterAllClosed.subscribe(() => {
             doc.body.classList.remove('no-scroll');
         });
     }
@@ -36,6 +37,7 @@ export class LoginComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             //this.initLoggedInUser();   
         });
+
     }
 }
 

@@ -27,7 +27,8 @@ var AuthComponent = (function () {
 AuthComponent = __decorate([
     core_1.Component({
         selector: 'auth-component',
-        templateUrl: './templates/auth/auth-component.html'
+        templateUrl: './templates/auth/auth-component.html',
+        styleUrls: ['styles/app/auth/auth-style.css']
     }),
     __metadata("design:paramtypes", [index_1.AuthenticationService])
 ], AuthComponent);
