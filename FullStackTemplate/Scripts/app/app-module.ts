@@ -15,9 +15,13 @@ import { AuthenticationService, AuthComponent } from './auth/index';
 
 //Main application component
 import { AppComponent, Home } from './app-component';
+
 //Login components
 import { LoginComponent, LoginDialog, LogoutComponent } from './login/login-component';
 import { RegisterComponent, RegisterDialog } from './login/register-component';
+
+//Search box
+import { SearchComponent } from './search/index';
 
 //Application Routes
 import { DEMO_APP_ROUTES } from './routes';
@@ -45,7 +49,8 @@ import { DEMO_APP_ROUTES } from './routes';
         LogoutComponent,
         RegisterComponent,
         LoginDialog,
-        RegisterDialog
+        RegisterDialog,
+        SearchComponent
     ],
     entryComponents: [AppComponent, LoginDialog, RegisterDialog],
     bootstrap: [AppComponent]

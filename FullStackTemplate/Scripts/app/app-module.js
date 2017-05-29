@@ -24,6 +24,8 @@ var app_component_1 = require("./app-component");
 //Login components
 var login_component_1 = require("./login/login-component");
 var register_component_1 = require("./login/register-component");
+//Search box
+var index_3 = require("./search/index");
 //Application Routes
 var routes_1 = require("./routes");
 var AppModule = (function () {
@@ -59,7 +61,8 @@ AppModule = __decorate([
             login_component_1.LogoutComponent,
             register_component_1.RegisterComponent,
             login_component_1.LoginDialog,
-            register_component_1.RegisterDialog
+            register_component_1.RegisterDialog,
+            index_3.SearchComponent
         ],
         entryComponents: [app_component_1.AppComponent, login_component_1.LoginDialog, register_component_1.RegisterDialog],
         bootstrap: [app_component_1.AppComponent]

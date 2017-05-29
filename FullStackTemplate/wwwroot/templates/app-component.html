@@ -16,7 +16,7 @@
         </md-nav-list>
         <button md-button (click)="start.close()">CLOSE</button>
     </md-sidenav>
-    <header>
+    <header #headerElem>
         <div class="row">
             <div class="logo col-md-4">
                 <div class="col-md-3 menu-icon">
@@ -30,10 +30,10 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="search-component">
-                    <i class="search-icon fa fa-search" aria-hidden="true"></i>
-                    <input placeholder="search" type="text" title="search items" />
-                </div>
+                <search-box 
+                    (onSearchActive)="searchActivated($event)"
+                    (onSearchDeactive)="searchDeactivated($event)"
+                    ></search-box>
             </div>
             <div class="col-md-4">
                 <div class="col-md-5 food-component">

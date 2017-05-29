@@ -1,0 +1,4 @@
+<div class="search-component">
+    <i class="search-icon fa fa-search" aria-hidden="true"></i>
+    <input placeholder="search" [(ngModel)]="searchKeyword" (focus)="onSearch()" (focusout)="outSearch()" #searchBox="ngModel" type="text" title="search items" />
+</div>
