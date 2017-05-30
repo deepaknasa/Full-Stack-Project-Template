@@ -1,0 +1,36 @@
+﻿.search-component {
+    $backgroundColor: #a1c6ac;
+    width: 300px;
+    height: 35px;
+    margin: 0 auto;
+    margin-top: 8px;
+    text-align: center;
+    background: $backgroundColor;
+    border-radius: 28px;
+
+    .search-icon {
+        font-size: 15px;
+        vertical-align: top;
+        height: 100%;
+        padding-top: 11px;
+    }
+
+    input {
+        font-size: 20px;
+        border: none;
+        background: $backgroundColor;
+        line-height: 1px;
+        padding: 0;
+        vertical-align: top;
+        height: 100%;
+    }
+}
+
+.search-component.search-activated {
+        $backgroundColor: white;
+        background: $backgroundColor;
+
+        input {
+            background: $backgroundColor;
+        }
+}

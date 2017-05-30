@@ -26,7 +26,7 @@ var paths = {
         'scripts/systemjs.config.js',
         'scripts/systemjs-angular-loader.js'
     ],
-    styles: ['styles/site.scss', 'scripts/**/*.scss'],
+    styles: ['styles/site.scss'],
     vendor: [vendorPath + '*.css'],
     fa_css: [vendorPath + 'css/font-awesome.min.css'],
     fa_font: [vendorPath + 'fonts/FontAwesome.otf', vendorPath + 'fonts/fontawesome-webfont.eot', vendorPath + 'fonts/fontawesome-webfont.svg', vendorPath + 'fonts/fontawesome-webfont.ttf', vendorPath + 'fonts/fontawesome-webfont.woff', vendorPath + 'fonts/fontawesome-webfont.woff2'],
@@ -92,8 +92,16 @@ gulp.task('vendor:css', ['fa:font', 'fa:css'], function () {
         .pipe(gulp.dest('wwwroot/styles/vendor'));
 });
 
-gulp.task('sass', ['vendor:css'], function () {
-    return gulp.src(paths.styles.concat(paths.appStyles))
+gulp.task('sass:appStyles', function () {
+    return gulp.src(paths.appStyles)
+        .pipe(sourcemaps.init())
+        .pipe(sass().on('error', sass.logError))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('wwwroot/styles/app'));
+});
+
+gulp.task('sass', ['vendor:css', 'sass:appStyles'], function () {
+    return gulp.src(paths.styles)
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
         .pipe(sourcemaps.write())

@@ -15,23 +15,10 @@ var AppComponent = (function () {
     function AppComponent(session, authenticationService) {
         this.session = session;
         this.authenticationService = authenticationService;
-        this.searchActivatedClass = 'search-activated';
         session = this.authenticationService.getUserSession();
     }
-    AppComponent.prototype.searchActivated = function (searchActivated) {
-        console.log('inside searchActivated. Param value is : ', searchActivated);
-        this.header.nativeElement.classList.add(this.searchActivatedClass);
-    };
-    AppComponent.prototype.searchDeactivated = function (searchActivated) {
-        console.log('inside searchDeactivated. Param value is : ', searchActivated);
-        this.header.nativeElement.classList.remove(this.searchActivatedClass);
-    };
     return AppComponent;
 }());
-__decorate([
-    core_1.ViewChild('headerElem'),
-    __metadata("design:type", core_1.ElementRef)
-], AppComponent.prototype, "header", void 0);
 AppComponent = __decorate([
     core_1.Component({
         selector: 'my-app',
@@ -48,7 +35,7 @@ var Home = (function () {
 Home = __decorate([
     core_1.Component({
         selector: 'home',
-        template: "\n    <h1>Fullstack project template</h1>\n    <p>This template facilitate quicker project setup</p>\n  "
+        template: ""
     })
 ], Home);
 exports.Home = Home;

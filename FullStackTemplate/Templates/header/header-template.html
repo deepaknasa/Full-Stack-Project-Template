@@ -1,0 +1,32 @@
+﻿<header #headerElem>
+    <div class="row">
+        <div class="logo col-md-4">
+            <div class="col-md-3 menu-icon">
+                <a (click)="start.open()">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </a>
+            </div>
+            <div class="col-md-9">
+                <!--<i class="fa fa-font-awesome" aria-hidden="true"></i>-->
+                <h3>food-Buddy</h3>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <search-box (onSearchActive)="searchActivated($event)"
+                        (onSearchDeactive)="searchDeactivated($event)"></search-box>
+        </div>
+        <div class="col-md-4">
+            <div class="col-md-5 food-component">
+                <div class="col-md-6">
+                    <a><i class="fa fa-plus-square-o" aria-hidden="true"></i></a>
+                </div>
+                <div class="col-md-6">
+                    <a><i class="fa fa-bar-chart" aria-hidden="true"></i></a>
+                </div>
+            </div>
+            <div class="col-md-3 col-md-offset-4 auth-component">
+                <auth-component></auth-component>
+            </div>
+        </div>
+    </div>
+</header>

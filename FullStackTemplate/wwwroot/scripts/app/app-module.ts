@@ -23,6 +23,9 @@ import { RegisterComponent, RegisterDialog } from './login/register-component';
 //Search box
 import { SearchComponent } from './search/index';
 
+//Application header
+import { HeaderComponent } from './header/index';
+
 //Application Routes
 import { DEMO_APP_ROUTES } from './routes';
 
@@ -50,7 +53,8 @@ import { DEMO_APP_ROUTES } from './routes';
         RegisterComponent,
         LoginDialog,
         RegisterDialog,
-        SearchComponent
+        SearchComponent,
+        HeaderComponent
     ],
     entryComponents: [AppComponent, LoginDialog, RegisterDialog],
     bootstrap: [AppComponent]
