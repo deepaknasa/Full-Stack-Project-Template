@@ -1,7 +1,28 @@
-<div class="stats" *ngFor="let stat of statItemListLag; let i = index"
-     (@flyInOut.done)="doNext()"
-     [@flyInOut]="'in'" (click)="removeMe(i)">
-    <md-card>
-        {{stat.itemName}} is emptying
-    </md-card>
+<div class="row">
+    <div class="stats col-md-6 col-sm-12" *ngFor="let stat of statItemListLag; let i = index"
+         (@flyInOut.done)="doNext()"
+         [@flyInOut]="'in'">
+        <!--(click)="removeMe(i)"-->
+
+        <md-card>
+            <div class="row" style="height: 100%;">
+                <div class="col-xs-12" style="
+                                        height: 100%;
+                                        vertical-align: middle;
+                                        text-align: center;
+                                        line-height: 28px;">
+                    <div class="col-xs-6" style="border-right: 1px rgba(149, 145, 145, 0.31) solid;">
+                        <span>{{stat.itemName}} is emptying</span>
+                    </div>
+                    <div class="col-xs-6" style=""> <!--background: linear-gradient( 180deg, white, red );-->
+                        <span style="
+                            height: 100%;
+                            width: 100%;
+                            display: inline-block;
+                            font-size: 30px;">75%</span>
+                    </div>
+                </div>
+            </div>
+        </md-card>
+    </div>
 </div>

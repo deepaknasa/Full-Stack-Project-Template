@@ -39,7 +39,7 @@ StatisticsComponent = __decorate([
         styleUrls: ['styles/app/stats/stats-style.css'],
         animations: [
             core_1.trigger('flyInOut', [
-                core_1.state('in', core_1.style({ transform: 'translateX(0)' })),
+                core_1.state('in', core_1.style({})),
                 core_1.transition('void => *', [
                     core_1.animate(400, core_1.keyframes([
                         core_1.style({ opacity: 0, offset: 0 }),

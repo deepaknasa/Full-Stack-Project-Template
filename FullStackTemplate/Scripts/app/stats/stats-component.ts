@@ -22,7 +22,7 @@ import { DOCUMENT } from '@angular/platform-browser';
     styleUrls: ['styles/app/stats/stats-style.css'],
     animations: [
         trigger('flyInOut', [
-            state('in', style({ transform: 'translateX(0)' })),
+            state('in', style({ })),
             transition('void => *', [
                 animate(400, keyframes([
                     style({ opacity: 0, offset: 0 }),
