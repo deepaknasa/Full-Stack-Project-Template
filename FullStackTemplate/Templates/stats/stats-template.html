@@ -1,0 +1,7 @@
+﻿<div class="stats" *ngFor="let stat of statItemListLag; let i = index"
+     (@flyInOut.done)="doNext()"
+     [@flyInOut]="'in'" (click)="removeMe(i)">
+    <md-card>
+        {{stat.itemName}} is emptying
+    </md-card>
+</div>

@@ -1,10 +1,10 @@
 "use strict";
-var app_component_1 = require("./app-component");
-var index_1 = require("./login/index");
+var index_1 = require("./stats/index");
+var index_2 = require("./login/index");
 exports.DEMO_APP_ROUTES = [
-    { path: '', component: app_component_1.Home },
-    { path: 'login', component: index_1.LoginComponent },
-    { path: 'logout', component: index_1.LogoutComponent },
-    { path: 'register', component: index_1.RegisterComponent },
+    { path: '', component: index_1.StatisticsComponent },
+    { path: 'login', component: index_2.LoginComponent },
+    { path: 'logout', component: index_2.LogoutComponent },
+    { path: 'register', component: index_2.RegisterComponent },
 ];
 //# sourceMappingURL=routes.js.map

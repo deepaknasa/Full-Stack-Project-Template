@@ -32,7 +32,13 @@
 </head>
 <body>
     @RenderBody()
-    <my-app>Loading...</my-app>
+    <my-app>
+        <div class="container">
+            <div id="app-loader">
+                <img src="~/styles/images/loader.gif" width="150" />
+            </div>
+        </div>
+    </my-app>
     <footer>
         @await Html.PartialAsync("_FooterPartial")
     </footer>

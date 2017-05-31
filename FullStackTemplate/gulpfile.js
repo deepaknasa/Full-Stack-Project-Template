@@ -31,6 +31,7 @@ var paths = {
     fa_css: [vendorPath + 'css/font-awesome.min.css'],
     fa_font: [vendorPath + 'fonts/FontAwesome.otf', vendorPath + 'fonts/fontawesome-webfont.eot', vendorPath + 'fonts/fontawesome-webfont.svg', vendorPath + 'fonts/fontawesome-webfont.ttf', vendorPath + 'fonts/fontawesome-webfont.woff', vendorPath + 'fonts/fontawesome-webfont.woff2'],
     templates: ['templates/**/*.html'],
+    images: ['styles/images/*.gif', 'styles/images/*.jpg', 'styles/images/*.png'],
     libs: ['node_modules/core-js/client/shim.min.js',
         'node_modules/zone.js/dist/zone.js',
         'node_modules/rxjs/bundles/Rx.js',
@@ -74,7 +75,7 @@ gulp.task('script:watch', function () {
 });
 
 gulp.task('watch', function () {
-    return gulp.start('default', 'sass:watch', 'template:watch', 'script:watch');
+    return gulp.start('default', 'sass:watch', 'template:watch', 'script:watch', 'images');
 });
 
 gulp.task('fa:font', function () {
@@ -90,6 +91,11 @@ gulp.task('fa:css', function () {
 gulp.task('vendor:css', ['fa:font', 'fa:css'], function () {
     return gulp.src(paths.vendor)
         .pipe(gulp.dest('wwwroot/styles/vendor'));
+});
+
+gulp.task('images', function () {
+    return gulp.src(paths.images)
+        .pipe(gulp.dest('wwwroot/styles/images'));
 });
 
 gulp.task('sass:appStyles', function () {
@@ -112,7 +118,7 @@ gulp.task('sass', ['vendor:css', 'sass:appStyles'], function () {
 });
 
 gulp.task('default', ['clean'], function () {
-    gulp.start(['lib', 'app', 'sass', 'template'])
+    gulp.start(['lib', 'app', 'sass', 'template', 'images'])
         .src(paths.scripts)
         .pipe(gulp.dest('wwwroot/scripts'))
 });

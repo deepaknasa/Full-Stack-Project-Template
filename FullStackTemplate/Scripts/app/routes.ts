@@ -1,9 +1,10 @@
 ﻿import {Routes} from '@angular/router';
 import { Home } from './app-component';
+import { StatisticsComponent } from './stats/index';
 import { LoginComponent, RegisterComponent, LogoutComponent } from './login/index';
 
 export const DEMO_APP_ROUTES: Routes = [
-  {path: '', component: Home},
+    { path: '', component: StatisticsComponent},
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
   { path: 'register', component: RegisterComponent },
