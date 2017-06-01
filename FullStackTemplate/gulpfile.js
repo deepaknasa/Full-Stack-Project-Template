@@ -42,7 +42,7 @@ var paths = {
         'node_modules/systemjs/dist/system.src.js']
 };
 
-gulp.task('lib', ['clean'], function () {
+gulp.task('lib', function () {
     return gulp.src(paths.libs).pipe(gulp.dest('wwwroot/scripts/lib'));
 });
 
