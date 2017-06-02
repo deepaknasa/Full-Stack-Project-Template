@@ -30,3 +30,41 @@ md-card.mat-card {
         }
     }
 }
+
+@media (max-width: 360px) {
+    .stats {
+        padding: 3px;
+        height: 60px;
+    }
+
+    md-card.mat-card {
+        padding: 2px;
+        height: 100%;
+    }
+
+    .item-card-container {
+        margin-left: 3px;
+        margin-right: 3px;
+
+        .item-card {
+            text-align: center;
+
+            .item-card-desc {
+                padding: 0;
+
+                span {
+                    line-height: 40%;
+                }
+            }
+
+            .item-card-stat {
+                background: rgba(255, 0, 0, 0);
+
+                span {
+                    line-height: 50px;
+                    font-size: 25px;
+                }
+            }
+        }
+    }
+}

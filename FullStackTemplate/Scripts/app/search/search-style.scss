@@ -27,10 +27,44 @@
 }
 
 .search-component.search-activated {
+    $backgroundColor: white;
+    background: $backgroundColor;
+
+    input {
+        background: $backgroundColor;
+    }
+}
+
+@media (max-width: 360px) {
+    /* For mobile phones: */
+    .search-component {
+        $backgroundColor: #a1c6ac;
+        width: 100%;
+        border-radius: 8px;
+
+        .search-icon-wrapper {
+            width: 100%;
+            display: inline-block;
+            text-align: right;
+        }
+        
+        .search-icon {
+            font-size: 20px;
+            height: 100%;
+            padding-top:7px;
+        }
+
+        input {
+            display: none;
+        }
+    }
+
+    .search-component.search-activated {
         $backgroundColor: white;
         background: $backgroundColor;
 
         input {
             background: $backgroundColor;
         }
+    }
 }

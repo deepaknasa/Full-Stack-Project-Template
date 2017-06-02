@@ -57,8 +57,8 @@ import { DEMO_APP_ROUTES } from './routes';
         LoginDialog,
         RegisterDialog,
         SearchComponent,
-        //HeaderComponent,
-        //StatisticsComponent
+        HeaderComponent,
+        StatisticsComponent
     ],
     entryComponents: [AppComponent, LoginDialog, RegisterDialog],
     bootstrap: [AppComponent]

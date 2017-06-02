@@ -67,7 +67,7 @@ gulp.task('template:watch', function () {
 });
 
 gulp.task('sass:watch', function () {
-    return gulp.watch(paths.styles, ['sass']);
+    return gulp.watch(paths.styles.concat(paths.appStyles), ['sass']);
 });
 
 gulp.task('script:watch', function () {

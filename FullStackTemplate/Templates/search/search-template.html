@@ -1,9 +1,13 @@
-﻿<div class="search-component" #searchDiv>
-    <i class="search-icon fa fa-search" aria-hidden="true"></i>
-    <input placeholder="search" 
-           (focus)="onSearch()" 
-           (focusout)="outSearch()" 
-           #searchBox 
-           type="text" 
-           title="search items" />
+﻿<div class="row">
+    <div class="search-component col-xs-12" #searchDiv>
+        <span class="search-icon-wrapper">
+            <i class="search-icon fa fa-search" aria-hidden="true"></i>
+        </span>
+        <input placeholder="search"
+               (focus)="onSearch()"
+               (focusout)="outSearch()"
+               #searchBox
+               type="text"
+               title="search items" />
+    </div>
 </div>

@@ -1,4 +1,7 @@
 ﻿header {
+    .row {
+        margin: 0;
+    }
     background: #7ebe92;
     height: 52px;
     font-size: 30px;
@@ -32,4 +35,55 @@ header.search-activated {
             background: $backgroundColor;
         }
     }
+}
+
+@media (max-width: 360px) {
+    header {
+        background: #7ebe92;
+        height: 52px;
+        font-size: 30px;
+        
+        .menu-icon a:hover, .food-component a:hover {
+            color: white;
+        }
+
+        .logo h3 {
+            margin: 13px;
+            font-weight: bold;
+        }
+
+        .menu-icon {
+            padding: 0;
+
+            i {
+                padding-top: 11px;
+            }
+        }
+
+        .menu-logo {
+            display: none;
+        }
+
+        .food-component {
+            padding: 5px;
+        }
+
+        .auth-component {
+            display: none;
+        }
+    }
+
+    header.search-activated {
+        $backgroundColor: white;
+        background: $backgroundColor;
+
+        .search-component {
+            background: $backgroundColor;
+
+            input {
+                background: $backgroundColor;
+            }
+        }
+    }
+
 }

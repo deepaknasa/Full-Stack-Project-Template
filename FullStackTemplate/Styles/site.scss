@@ -35,33 +35,28 @@ a {
 
 .container {
     margin: 0 auto;
-    width: 760px;
-    min-height:450px;
+    max-width: 760px;
+    min-height:95vh;
 }
 
 @media (max-width: 480px) {
     /* For mobile phones: */
-    .container {
-        margin: 0 auto;
-        width: 400px;
-        min-height: 450px;
-        
-    }
-
-    .loading-image {
-        width: 100%;
-        margin-top: 200px;
-    }
 }
 
 
-#app-loader {
-    margin: 0 auto;
-    margin-top: 125px;
-    /*width: 25%;*/
+.loading-image {
+    display: inline-block;
+    width: 100%;
+    margin-top: 33vh;
+    text-align: center;
+    img {
+        max-width: 150px;
+    }
 }
 
-
+.row {
+    margin: 0;
+}
 
 footer {
     text-align: center;

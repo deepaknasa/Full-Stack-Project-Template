@@ -23,6 +23,13 @@ var StatisticsComponent = (function () {
             { itemName: 'green chilli', itemStockLeft: 99 },
             { itemName: 'beetroot', itemStockLeft: 82 },
             { itemName: 'sugar', itemStockLeft: 91 },
+            { itemName: 'rasberry', itemStockLeft: 43 },
+            { itemName: 'eggs', itemStockLeft: 19 },
+            { itemName: 'rice', itemStockLeft: 32 },
+            { itemName: 'tomato', itemStockLeft: 57 },
+            { itemName: 'green chilli', itemStockLeft: 59 },
+            { itemName: 'beetroot', itemStockLeft: 89 },
+            { itemName: 'sugar', itemStockLeft: 91 },
             { itemName: 'salt', itemStockLeft: 0 },
             { itemName: 'orange', itemStockLeft: 70 }
         ];
