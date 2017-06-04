@@ -1,4 +1,4 @@
-﻿<md-sidenav-container class="demo-root" fullscreen>
+﻿<!--<md-sidenav-container class="demo-root" fullscreen>
     <md-sidenav #start>
         <md-nav-list>
             <a *ngFor="let navItem of navItems"
@@ -16,10 +16,21 @@
         </md-nav-list>
         <button md-button (click)="start.close()">CLOSE</button>
     </md-sidenav>
-    <app-header></app-header>
     <div class="container">
-        <!-- Main component for a primary marketing message or call to action -->
+        <app-header></app-header>
+    //Main component for a primary marketing message or call to action    
+    <div class="content">
         <router-outlet></router-outlet>
-    </div> <!-- /container -->
+    </div>
 
-</md-sidenav-container>
+    </div> // /container
+
+</md-sidenav-container>-->
+
+
+<div class="container">
+    <app-header></app-header>
+    <div class="content">
+        <router-outlet></router-outlet>
+    </div>
+</div>
