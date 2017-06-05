@@ -9,6 +9,7 @@ header {
     .row {
         margin: 0;
     }
+
     background: #7ebe92;
     height: 52px;
     font-size: 30px;
@@ -49,7 +50,7 @@ header.search-activated {
         background: #7ebe92;
         height: 52px;
         font-size: 30px;
-        
+
         .menu-icon a:hover, .food-component a:hover {
             color: white;
         }
@@ -73,6 +74,14 @@ header.search-activated {
 
         .food-component {
             padding: 5px;
+
+            .stat-chart {
+                display: none;
+            }
+
+            .add-items {
+                padding: 0;
+            }
         }
 
         .auth-component {
