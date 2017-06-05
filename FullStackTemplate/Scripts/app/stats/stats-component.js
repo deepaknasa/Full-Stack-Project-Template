@@ -10,31 +10,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
+var stats_search_service_1 = require("./stats-search-service");
 var StatisticsComponent = (function () {
-    function StatisticsComponent(_sanitizer) {
+    function StatisticsComponent(_sanitizer, statsService) {
         this._sanitizer = _sanitizer;
-        this.statItemList = [
-            { itemName: 'potato', itemStockLeft: 10 },
-            { itemName: 'apple', itemStockLeft: 23 },
-            { itemName: 'rasberry', itemStockLeft: 44 },
-            { itemName: 'eggs', itemStockLeft: 21 },
-            { itemName: 'rice', itemStockLeft: 35 },
-            { itemName: 'tomato', itemStockLeft: 67 },
-            { itemName: 'green chilli', itemStockLeft: 99 },
-            { itemName: 'beetroot', itemStockLeft: 82 },
-            { itemName: 'sugar', itemStockLeft: 91 },
-            { itemName: 'rasberry', itemStockLeft: 43 },
-            { itemName: 'eggs', itemStockLeft: 19 },
-            { itemName: 'rice', itemStockLeft: 32 },
-            { itemName: 'tomato', itemStockLeft: 57 },
-            { itemName: 'green chilli', itemStockLeft: 59 },
-            { itemName: 'beetroot', itemStockLeft: 89 },
-            { itemName: 'sugar', itemStockLeft: 91 },
-            { itemName: 'salt', itemStockLeft: 0 },
-            { itemName: 'orange', itemStockLeft: 70 }
-        ];
+        this.statsService = statsService;
         this.next = 0;
         this.statItemListLag = [];
+        this.statItemList = statsService.searchStats('');
         this.sortItems();
         this.doNext();
     }
@@ -104,7 +87,7 @@ StatisticsComponent = __decorate([
             ])
         ]
     }),
-    __metadata("design:paramtypes", [platform_browser_1.DomSanitizer])
+    __metadata("design:paramtypes", [platform_browser_1.DomSanitizer, stats_search_service_1.StatsSearchService])
 ], StatisticsComponent);
 exports.StatisticsComponent = StatisticsComponent;
 var FruitItem = (function () {

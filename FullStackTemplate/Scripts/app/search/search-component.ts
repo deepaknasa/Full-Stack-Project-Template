@@ -25,16 +25,20 @@ export class SearchComponent {
     handleKeyboardEvent(event: KeyboardEvent) {
         let x = event.keyCode;
         if (x === 27) {
-            console.log('searchInput: ', this.searchInput.nativeElement.value);
-            //this.searchInput.nativeElement.onblur();
             this.outSearch();
+        }
+
+        if (x === 13) {
+            //Search entered
+            this.outSearch();
+            console.log('search entered. Key word is : ', this.searchInput.nativeElement.value);
         }
     }
 
     searchActivatedClass: string = 'search-activated';
 
     searchKeyword: string;
-    constructor( private renderer: Renderer) { }
+    constructor(private renderer: Renderer) { }
 
     onSearch() {
         this.searchDiv.nativeElement.classList.add(this.searchActivatedClass);

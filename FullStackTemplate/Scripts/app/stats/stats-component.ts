@@ -15,7 +15,8 @@
     style
 } from '@angular/core';
 import { DOCUMENT, DomSanitizer } from '@angular/platform-browser';
-
+import { StatItem } from '../models/index';
+import { StatsSearchService } from './stats-search-service';
 
 @Component({
     selector: 'statistics',
@@ -42,30 +43,12 @@ import { DOCUMENT, DomSanitizer } from '@angular/platform-browser';
 export class StatisticsComponent {
     @ViewChild('stockLeft') leftStock: ElementRef;
 
-    statItemList: any[] = [
-        { itemName: 'potato', itemStockLeft: 10 },
-        { itemName: 'apple', itemStockLeft: 23 },
-        { itemName: 'rasberry', itemStockLeft: 44 },
-        { itemName: 'eggs', itemStockLeft: 21 },
-        { itemName: 'rice', itemStockLeft: 35 },
-        { itemName: 'tomato', itemStockLeft: 67 },
-        { itemName: 'green chilli', itemStockLeft: 99 },
-        { itemName: 'beetroot', itemStockLeft: 82 },
-        { itemName: 'sugar', itemStockLeft: 91 },
-        { itemName: 'rasberry', itemStockLeft: 43 },
-        { itemName: 'eggs', itemStockLeft: 19 },
-        { itemName: 'rice', itemStockLeft: 32 },
-        { itemName: 'tomato', itemStockLeft: 57 },
-        { itemName: 'green chilli', itemStockLeft: 59 },
-        { itemName: 'beetroot', itemStockLeft: 89 },
-        { itemName: 'sugar', itemStockLeft: 91 },
-        { itemName: 'salt', itemStockLeft: 0 },
-        { itemName: 'orange', itemStockLeft: 70 }
-    ];
+    statItemList: StatItem[];
     next: number = 0;
     statItemListLag: any[] = [];
 
-    constructor(private _sanitizer: DomSanitizer) {
+    constructor(private _sanitizer: DomSanitizer, private statsService: StatsSearchService) {
+        this.statItemList = statsService.searchStats('');
         this.sortItems();
         this.doNext();
     }

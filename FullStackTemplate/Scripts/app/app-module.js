@@ -53,6 +53,7 @@ AppModule = __decorate([
         providers: [
             { provide: common_1.APP_BASE_HREF, useValue: '/' },
             index_2.AuthenticationService,
+            index_4.StatsSearchService,
             index_1.RegisterModel,
             index_1.LoginModel,
             index_1.Session

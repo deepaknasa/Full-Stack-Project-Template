@@ -24,7 +24,7 @@ import { RegisterComponent, RegisterDialog } from './login/register-component';
 import { SearchComponent } from './search/index';
 
 //Statistics
-import { StatisticsComponent } from './stats/index';
+import { StatisticsComponent, StatsSearchService } from './stats/index';
 
 //Application header
 import { HeaderComponent } from './header/index';
@@ -43,6 +43,7 @@ import { DEMO_APP_ROUTES } from './routes';
     providers: [
         { provide: APP_BASE_HREF, useValue: '/' },
         AuthenticationService,
+        StatsSearchService,
         RegisterModel,
         LoginModel,
         Session
