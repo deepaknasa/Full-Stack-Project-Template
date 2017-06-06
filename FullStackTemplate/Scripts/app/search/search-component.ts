@@ -9,6 +9,8 @@
     Renderer
 } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
+import { StatItem } from '../models/index';
+import { StatsService } from '../stats/index';
 
 @Component({
     selector: 'search-box',
@@ -27,18 +29,30 @@ export class SearchComponent {
         if (x === 27) {
             this.outSearch();
         }
-
+        console.log('search input ', this.searchInput.nativeElement.value);
+        this.statsService.searchStats(this.searchInput.nativeElement.value);
         if (x === 13) {
             //Search entered
-            this.outSearch();
             console.log('search entered. Key word is : ', this.searchInput.nativeElement.value);
+            //this.statsService.searchStats(this.searchInput.nativeElement.value);
+            //this.statsService.statsUpdated.emit('statsUpdated');
         }
+    }
+
+    @HostListener('document:keydown.alt.x', ['$event'])
+    alternateSearchActivation(event: KeyboardEvent) {
+        this.onSearch();
+        this.renderer.invokeElementMethod(
+            this.searchInput.nativeElement,
+            'focus',
+            []);
     }
 
     searchActivatedClass: string = 'search-activated';
 
     searchKeyword: string;
-    constructor(private renderer: Renderer) { }
+    constructor(private renderer: Renderer,
+                private statsService: StatsService) { }
 
     onSearch() {
         this.searchDiv.nativeElement.classList.add(this.searchActivatedClass);
@@ -46,6 +60,8 @@ export class SearchComponent {
     }
 
     outSearch() {
+        this.searchInput.nativeElement.value = '';
+        this.statsService.resetStats();
         this.searchDiv.nativeElement.classList.remove(this.searchActivatedClass);
         this.renderer.invokeElementMethod(
             this.searchInput.nativeElement,

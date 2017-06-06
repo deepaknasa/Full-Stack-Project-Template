@@ -28,8 +28,10 @@ var register_component_1 = require("./login/register-component");
 var index_3 = require("./search/index");
 //Statistics
 var index_4 = require("./stats/index");
+//Storage service
+var index_5 = require("./shared/index");
 //Application header
-var index_5 = require("./header/index");
+var index_6 = require("./header/index");
 //Application Routes
 var routes_1 = require("./routes");
 var AppModule = (function () {
@@ -53,7 +55,8 @@ AppModule = __decorate([
         providers: [
             { provide: common_1.APP_BASE_HREF, useValue: '/' },
             index_2.AuthenticationService,
-            index_4.StatsSearchService,
+            index_4.StatsService,
+            index_5.StorageService,
             index_1.RegisterModel,
             index_1.LoginModel,
             index_1.Session
@@ -68,7 +71,7 @@ AppModule = __decorate([
             login_component_1.LoginDialog,
             register_component_1.RegisterDialog,
             index_3.SearchComponent,
-            index_5.HeaderComponent,
+            index_6.HeaderComponent,
             index_4.StatisticsComponent
         ],
         entryComponents: [app_component_1.AppComponent, login_component_1.LoginDialog, register_component_1.RegisterDialog],

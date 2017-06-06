@@ -3,14 +3,16 @@ import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 import { RegisterModel, LoginModel, Session } from '../models/index';
+import { StorageService } from '../shared/storage-service';
 
 @Injectable()
 export class AuthenticationService {
-    _currentUserKey: string = "currentUser";
     _session: Session;
     sessionUpdate: EventEmitter<Session> = new EventEmitter();
 
-    constructor(private http: Http, private session: Session) {
+    constructor(private http: Http,
+        private session: Session,
+        private storageService: StorageService) {
         this._session = session;
     }
 
@@ -25,7 +27,7 @@ export class AuthenticationService {
                 console.log('user response:', response.text());
                 if (response && response.status === 200) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    this.setCurrentUser(response.text());
+                    this.storageService.setCurrentUser(response.text());
                     this.sessionUpdated();
                     console.log('emit:event:sessionUpdated', this._session);
                 }
@@ -43,7 +45,7 @@ export class AuthenticationService {
                     console.log('user response:', response.text());
                     if (response && response.status === 200) {
                         // remove user from local storage to log user out
-                        this.clearSession();
+                        this.storageService.clearSession();
                         this.sessionUpdated();
                     }
                 })
@@ -65,24 +67,8 @@ export class AuthenticationService {
         }
     }
 
-    getCurrentUser() {
-        return localStorage.getItem(this._currentUserKey);
-    }
-
-    setCurrentUser(user: string) {
-        localStorage.setItem(this._currentUserKey, user);
-        this._session.userName = user;
-        this._session.isLoggedIn = true;
-    }
-
-    clearSession() {
-        localStorage.removeItem(this._currentUserKey);
-        this._session.userName = '';
-        this._session.isLoggedIn = false;
-    }
-
     isLoggedIn() {
-        return !!this.getCurrentUser();
+        return !!this.storageService.getCurrentUser();
     }
 
     register(model: RegisterModel) {
@@ -99,7 +85,7 @@ export class AuthenticationService {
                 if (response && response.status === 200) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
 
-                    this.setCurrentUser(response.text());
+                    this.storageService.setCurrentUser(response.text());
                     this.sessionUpdated();
                 }
             });
@@ -107,7 +93,19 @@ export class AuthenticationService {
 
     getUserSession(): Session {
         this._session.isLoggedIn = this.isLoggedIn();
-        this._session.userName = this.getCurrentUser();
+        this._session.userName = this.storageService.getCurrentUser();
         return this._session;
+    }
+
+    setCurrentUser(user: string) {
+        this.storageService.setCurrentUser(user);
+        this._session.userName = user;
+        this._session.isLoggedIn = true;
+    }
+
+    clearSession() {
+        this.storageService.clearSession();
+        this._session.userName = '';
+        this._session.isLoggedIn = false;
     }
 }

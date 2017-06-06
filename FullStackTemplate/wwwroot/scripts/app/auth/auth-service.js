@@ -13,11 +13,12 @@ var http_1 = require("@angular/http");
 var Observable_1 = require("rxjs/Observable");
 require("rxjs/add/operator/map");
 var index_1 = require("../models/index");
+var storage_service_1 = require("../shared/storage-service");
 var AuthenticationService = (function () {
-    function AuthenticationService(http, session) {
+    function AuthenticationService(http, session, storageService) {
         this.http = http;
         this.session = session;
-        this._currentUserKey = "currentUser";
+        this.storageService = storageService;
         this.sessionUpdate = new core_1.EventEmitter();
         this._session = session;
     }
@@ -32,7 +33,7 @@ var AuthenticationService = (function () {
             console.log('user response:', response.text());
             if (response && response.status === 200) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
-                _this.setCurrentUser(response.text());
+                _this.storageService.setCurrentUser(response.text());
                 _this.sessionUpdated();
                 console.log('emit:event:sessionUpdated', _this._session);
             }
@@ -49,7 +50,7 @@ var AuthenticationService = (function () {
                 console.log('user response:', response.text());
                 if (response && response.status === 200) {
                     // remove user from local storage to log user out
-                    _this.clearSession();
+                    _this.storageService.clearSession();
                     _this.sessionUpdated();
                 }
             })
@@ -72,21 +73,8 @@ var AuthenticationService = (function () {
             console.log(e);
         }
     };
-    AuthenticationService.prototype.getCurrentUser = function () {
-        return localStorage.getItem(this._currentUserKey);
-    };
-    AuthenticationService.prototype.setCurrentUser = function (user) {
-        localStorage.setItem(this._currentUserKey, user);
-        this._session.userName = user;
-        this._session.isLoggedIn = true;
-    };
-    AuthenticationService.prototype.clearSession = function () {
-        localStorage.removeItem(this._currentUserKey);
-        this._session.userName = '';
-        this._session.isLoggedIn = false;
-    };
     AuthenticationService.prototype.isLoggedIn = function () {
-        return !!this.getCurrentUser();
+        return !!this.storageService.getCurrentUser();
     };
     AuthenticationService.prototype.register = function (model) {
         var _this = this;
@@ -101,21 +89,33 @@ var AuthenticationService = (function () {
             console.log('user response:', response.text());
             if (response && response.status === 200) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
-                _this.setCurrentUser(response.text());
+                _this.storageService.setCurrentUser(response.text());
                 _this.sessionUpdated();
             }
         });
     };
     AuthenticationService.prototype.getUserSession = function () {
         this._session.isLoggedIn = this.isLoggedIn();
-        this._session.userName = this.getCurrentUser();
+        this._session.userName = this.storageService.getCurrentUser();
         return this._session;
+    };
+    AuthenticationService.prototype.setCurrentUser = function (user) {
+        this.storageService.setCurrentUser(user);
+        this._session.userName = user;
+        this._session.isLoggedIn = true;
+    };
+    AuthenticationService.prototype.clearSession = function () {
+        this.storageService.clearSession();
+        this._session.userName = '';
+        this._session.isLoggedIn = false;
     };
     return AuthenticationService;
 }());
 AuthenticationService = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http, index_1.Session])
+    __metadata("design:paramtypes", [http_1.Http,
+        index_1.Session,
+        storage_service_1.StorageService])
 ], AuthenticationService);
 exports.AuthenticationService = AuthenticationService;
 //# sourceMappingURL=auth-service.js.map

@@ -10,17 +10,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
-var stats_search_service_1 = require("./stats-search-service");
+var stats_service_1 = require("./stats-service");
 var StatisticsComponent = (function () {
     function StatisticsComponent(_sanitizer, statsService) {
+        var _this = this;
         this._sanitizer = _sanitizer;
         this.statsService = statsService;
         this.next = 0;
         this.statItemListLag = [];
-        this.statItemList = statsService.searchStats('');
+        this.statsService.statsUpdated.subscribe(function (event) {
+            _this.statItemList = _this.statsService.statItemList;
+            _this.resetItems();
+        });
+    }
+    StatisticsComponent.prototype.ngOnInit = function () {
+        this.resetItems();
+    };
+    StatisticsComponent.prototype.resetItems = function () {
+        this.next = 0;
+        this.statItemListLag = [];
+        this.statItemList = this.statsService.statItemList;
         this.sortItems();
         this.doNext();
-    }
+    };
     StatisticsComponent.prototype.sortItems = function () {
         this.statItemList = this.statItemList.sort(function (a, b) {
             return a.itemStockLeft < b.itemStockLeft ? -1 : a.itemStockLeft > b.itemStockLeft ? 1 : 0;
@@ -73,13 +85,13 @@ StatisticsComponent = __decorate([
             core_1.trigger('flyInOut', [
                 core_1.state('in', core_1.style({})),
                 core_1.transition('void => *', [
-                    core_1.animate(400, core_1.keyframes([
+                    core_1.animate(200, core_1.keyframes([
                         core_1.style({ opacity: 0, offset: 0 }),
                         core_1.style({ opacity: 1, offset: 1 })
                     ]))
                 ]),
                 core_1.transition('* => void', [
-                    core_1.animate(400, core_1.keyframes([
+                    core_1.animate(200, core_1.keyframes([
                         core_1.style({ opacity: 1, offset: 0 }),
                         core_1.style({ opacity: 0, offset: 1 })
                     ]))
@@ -87,7 +99,7 @@ StatisticsComponent = __decorate([
             ])
         ]
     }),
-    __metadata("design:paramtypes", [platform_browser_1.DomSanitizer, stats_search_service_1.StatsSearchService])
+    __metadata("design:paramtypes", [platform_browser_1.DomSanitizer, stats_service_1.StatsService])
 ], StatisticsComponent);
 exports.StatisticsComponent = StatisticsComponent;
 var FruitItem = (function () {

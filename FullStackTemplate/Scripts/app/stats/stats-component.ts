@@ -12,11 +12,12 @@
     transition,
     animate,
     keyframes,
-    style
+    style,
+    OnInit
 } from '@angular/core';
 import { DOCUMENT, DomSanitizer } from '@angular/platform-browser';
 import { StatItem } from '../models/index';
-import { StatsSearchService } from './stats-search-service';
+import { StatsService } from './stats-service';
 
 @Component({
     selector: 'statistics',
@@ -26,13 +27,13 @@ import { StatsSearchService } from './stats-search-service';
         trigger('flyInOut', [
             state('in', style({ })),
             transition('void => *', [
-                animate(400, keyframes([
+                animate(200, keyframes([
                     style({ opacity: 0, offset: 0 }),
                     style({ opacity: 1, offset: 1 })
                 ]))
             ]),
             transition('* => void', [
-                animate(400, keyframes([
+                animate(200, keyframes([
                     style({ opacity: 1, offset: 0 }),
                     style({ opacity: 0, offset: 1 })
                 ]))
@@ -40,15 +41,28 @@ import { StatsSearchService } from './stats-search-service';
         ])
     ]
 })
-export class StatisticsComponent {
+export class StatisticsComponent implements OnInit {
     @ViewChild('stockLeft') leftStock: ElementRef;
 
     statItemList: StatItem[];
     next: number = 0;
     statItemListLag: any[] = [];
 
-    constructor(private _sanitizer: DomSanitizer, private statsService: StatsSearchService) {
-        this.statItemList = statsService.searchStats('');
+    constructor(private _sanitizer: DomSanitizer, private statsService: StatsService) {
+        this.statsService.statsUpdated.subscribe((event: string) => {
+            this.statItemList = this.statsService.statItemList;
+            this.resetItems();
+        });
+    }
+
+    ngOnInit() {
+        this.resetItems();
+    }
+
+    resetItems(): void {
+        this.next = 0;
+        this.statItemListLag = [];
+        this.statItemList = this.statsService.statItemList;
         this.sortItems();
         this.doNext();
     }
