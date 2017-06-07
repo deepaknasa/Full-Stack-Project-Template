@@ -1,0 +1,50 @@
+/******************************************************************
+
+Site Name: Foodbuddy
+Code: Deepak Kumar
+Date: April 2017
+
+******************************************************************/
+body {
+  font-family: Roboto, 'Helvetica Neue', sans-serif; }
+  body * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; }
+  body input:focus, body a:focus {
+    outline: none; }
+
+.fl-right {
+  float: right; }
+
+.fl-left {
+  float: left; }
+
+a {
+  color: black; }
+
+.container {
+  margin: 0 auto;
+  max-width: 760px;
+  min-height: 95vh; }
+
+@media (max-width: 480px) {
+  /* For mobile phones: */ }
+
+.loading-image {
+  display: inline-block;
+  width: 100%;
+  margin-top: 33vh;
+  text-align: center; }
+  .loading-image img {
+    max-width: 150px; }
+
+.row {
+  margin: 0; }
+
+.content {
+  margin-top: 57px; }
+
+footer {
+  text-align: center; }
+
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2l0ZS5jc3MiLCJzb3VyY2VzIjpbInNpdGUuc2NzcyJdLCJzb3VyY2VzQ29udGVudCI6WyIvKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqXHJcblxyXG5TaXRlIE5hbWU6IEZvb2RidWRkeVxyXG5Db2RlOiBEZWVwYWsgS3VtYXJcclxuRGF0ZTogQXByaWwgMjAxN1xyXG5cclxuKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqL1xyXG5cclxuXHJcbmJvZHkge1xyXG4gICAgZm9udC1mYW1pbHk6IFJvYm90bywgJ0hlbHZldGljYSBOZXVlJywgc2Fucy1zZXJpZjtcclxuICAgIC8vIEhlbHBzIGZvbnRzIG9uIE9TWCBsb29rcyBtb3JlIGNvbnNpc3RlbnQgd2l0aCBvdGhlciBzeXN0ZW1zXHJcbiAgICAvLyBJc24ndCBjdXJyZW50bHkgaW4gYnV0dG9uIHN0eWxlcyBkdWUgdG8gcGVyZm9ybWFuY2UgY29uY2VybnNcclxuICAgICoge1xyXG4gICAgICAgIC13ZWJraXQtZm9udC1zbW9vdGhpbmc6IGFudGlhbGlhc2VkO1xyXG4gICAgICAgIC1tb3otb3N4LWZvbnQtc21vb3RoaW5nOiBncmF5c2NhbGU7XHJcbiAgICB9XHJcblxyXG4gICAgaW5wdXQ6Zm9jdXMsIGE6Zm9jdXMge1xyXG4gICAgICAgIG91dGxpbmU6IG5vbmU7XHJcbiAgICB9XHJcbn1cclxuXHJcbi5mbC1yaWdodCB7XHJcbiAgICBmbG9hdDogcmlnaHQ7XHJcbn1cclxuXHJcbi5mbC1sZWZ0IHtcclxuICAgIGZsb2F0OiBsZWZ0O1xyXG59XHJcblxyXG5hIHtcclxuICAgIGNvbG9yOiBibGFjaztcclxufVxyXG5cclxuLmNvbnRhaW5lciB7XHJcbiAgICBtYXJnaW46IDAgYXV0bztcclxuICAgIG1heC13aWR0aDogNzYwcHg7XHJcbiAgICBtaW4taGVpZ2h0Ojk1dmg7XHJcbn1cclxuXHJcbkBtZWRpYSAobWF4LXdpZHRoOiA0ODBweCkge1xyXG4gICAgLyogRm9yIG1vYmlsZSBwaG9uZXM6ICovXHJcbn1cclxuXHJcblxyXG4ubG9hZGluZy1pbWFnZSB7XHJcbiAgICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIG1hcmdpbi10b3A6IDMzdmg7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICBpbWcge1xyXG4gICAgICAgIG1heC13aWR0aDogMTUwcHg7XHJcbiAgICB9XHJcbn1cclxuXHJcbi5yb3cge1xyXG4gICAgbWFyZ2luOiAwO1xyXG59XHJcblxyXG4uY29udGVudCB7XHJcbiAgICBtYXJnaW4tdG9wOiA1N3B4O1xyXG59XHJcblxyXG5mb290ZXIge1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG59Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7bUVBTW1FO0FBR25FLEFBQUEsSUFBSSxDQUFDO0VBQ0QsV0FBVyxFQUFFLG9DQUFvQyxHQVdwRDtFQVpELEFBSUksSUFKQSxDQUlBLENBQUMsQ0FBQztJQUNFLHNCQUFzQixFQUFFLFdBQVc7SUFDbkMsdUJBQXVCLEVBQUUsU0FBUyxHQUNyQztFQVBMLEFBU0ksSUFUQSxDQVNBLEtBQUssQUFBQSxNQUFNLEVBVGYsQUFTaUIsSUFUYixDQVNhLENBQUMsQUFBQSxNQUFNLENBQUM7SUFDakIsT0FBTyxFQUFFLElBQUksR0FDaEI7O0FBR0wsQUFBQSxTQUFTLENBQUM7RUFDTixLQUFLLEVBQUUsS0FBSyxHQUNmOztBQUVELEFBQUEsUUFBUSxDQUFDO0VBQ0wsS0FBSyxFQUFFLElBQUksR0FDZDs7QUFFRCxBQUFBLENBQUMsQ0FBQztFQUNFLEtBQUssRUFBRSxLQUFLLEdBQ2Y7O0FBRUQsQUFBQSxVQUFVLENBQUM7RUFDUCxNQUFNLEVBQUUsTUFBTTtFQUNkLFNBQVMsRUFBRSxLQUFLO0VBQ2hCLFVBQVUsRUFBQyxJQUFJLEdBQ2xCOztBQUVELE1BQU0sRUFBRSxTQUFTLEVBQUUsS0FBSztFQUNwQix3QkFBd0I7O0FBSTVCLEFBQUEsY0FBYyxDQUFDO0VBQ1gsT0FBTyxFQUFFLFlBQVk7RUFDckIsS0FBSyxFQUFFLElBQUk7RUFDWCxVQUFVLEVBQUUsSUFBSTtFQUNoQixVQUFVLEVBQUUsTUFBTSxHQUlyQjtFQVJELEFBS0ksY0FMVSxDQUtWLEdBQUcsQ0FBQztJQUNBLFNBQVMsRUFBRSxLQUFLLEdBQ25COztBQUdMLEFBQUEsSUFBSSxDQUFDO0VBQ0QsTUFBTSxFQUFFLENBQUMsR0FDWjs7QUFFRCxBQUFBLFFBQVEsQ0FBQztFQUNMLFVBQVUsRUFBRSxJQUFJLEdBQ25COztBQUVELEFBQUEsTUFBTSxDQUFDO0VBQ0gsVUFBVSxFQUFFLE1BQU0sR0FDckIifQ== */
