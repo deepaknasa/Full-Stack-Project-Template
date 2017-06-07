@@ -22,14 +22,15 @@ var StatsService = (function () {
     }
     StatsService.prototype.searchStats = function (searchKeyword) {
         this.statItemList = this.storageService.getStats().filter(function (s) {
-            console.log('each item is, ', s.itemName, searchKeyword);
+            //console.log('each item is, ', s.itemName, searchKeyword);
             return s.itemName.includes(searchKeyword);
         });
-        this.statsUpdated.emit('statsUpdated');
+        this.statsUpdated.emit(this.statItemList.slice());
+        return this.statItemList.slice();
     };
     StatsService.prototype.resetStats = function () {
         this.statItemList = this.storageService.getStats();
-        this.statsUpdated.emit('statsUpdated');
+        this.statsUpdated.emit(this.statItemList.slice());
     };
     StatsService.prototype.getAllStats = function () {
         return this.storageService.getStats();

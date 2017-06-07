@@ -49,20 +49,20 @@ export class StatisticsComponent implements OnInit {
     statItemListLag: any[] = [];
 
     constructor(private _sanitizer: DomSanitizer, private statsService: StatsService) {
-        this.statsService.statsUpdated.subscribe((event: string) => {
-            this.statItemList = this.statsService.statItemList;
+        this.statsService.statsUpdated.subscribe((stats: StatItem[]) => {
+            this.statItemList = stats;
             this.resetItems();
         });
     }
 
     ngOnInit() {
+        this.statItemList = this.statsService.getAllStats();
         this.resetItems();
     }
 
     resetItems(): void {
         this.next = 0;
         this.statItemListLag = [];
-        this.statItemList = this.statsService.statItemList;
         this.sortItems();
         this.doNext();
     }

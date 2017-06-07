@@ -18,18 +18,18 @@ var StatisticsComponent = (function () {
         this.statsService = statsService;
         this.next = 0;
         this.statItemListLag = [];
-        this.statsService.statsUpdated.subscribe(function (event) {
-            _this.statItemList = _this.statsService.statItemList;
+        this.statsService.statsUpdated.subscribe(function (stats) {
+            _this.statItemList = stats;
             _this.resetItems();
         });
     }
     StatisticsComponent.prototype.ngOnInit = function () {
+        this.statItemList = this.statsService.getAllStats();
         this.resetItems();
     };
     StatisticsComponent.prototype.resetItems = function () {
         this.next = 0;
         this.statItemListLag = [];
-        this.statItemList = this.statsService.statItemList;
         this.sortItems();
         this.doNext();
     };

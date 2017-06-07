@@ -7,7 +7,7 @@ import { StorageService } from '../shared/index'
 
 @Injectable()
 export class StatsService {
-    statsUpdated: EventEmitter<string> = new EventEmitter();
+    statsUpdated: EventEmitter<StatItem[]> = new EventEmitter();
     statItemList: StatItem[] = [];
 
     constructor(private http: Http,
@@ -15,17 +15,18 @@ export class StatsService {
         this.statItemList = this.storageService.getStats();
     }
 
-    searchStats(searchKeyword: string): void {
+    searchStats(searchKeyword: string): StatItem[] {
         this.statItemList = this.storageService.getStats().filter(function (s) {
-            console.log('each item is, ', s.itemName, searchKeyword);
+            //console.log('each item is, ', s.itemName, searchKeyword);
             return s.itemName.includes(searchKeyword);
         });
-        this.statsUpdated.emit('statsUpdated');
+        this.statsUpdated.emit(this.statItemList.slice());
+        return this.statItemList.slice();
     }
 
     resetStats() {
         this.statItemList = this.storageService.getStats();
-        this.statsUpdated.emit('statsUpdated');
+        this.statsUpdated.emit(this.statItemList.slice());
     }
 
     getAllStats(): StatItem[] {

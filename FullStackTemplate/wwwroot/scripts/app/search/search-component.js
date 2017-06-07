@@ -10,6 +10,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var index_1 = require("../stats/index");
+var Observable_1 = require("rxjs/Observable");
+var Subject_1 = require("rxjs/Subject");
+require("rxjs/add/operator/map");
+// Observable operators
+require("rxjs/add/operator/catch");
+require("rxjs/add/operator/debounceTime");
+require("rxjs/add/operator/distinctUntilChanged");
 var SearchComponent = (function () {
     function SearchComponent(renderer, statsService) {
         this.renderer = renderer;
@@ -17,21 +24,34 @@ var SearchComponent = (function () {
         this.searchActivated = new core_1.EventEmitter();
         this.searchDeactivated = new core_1.EventEmitter();
         this.searchActivatedClass = 'search-activated';
+        this.searchKeyword = new Subject_1.Subject();
     }
     SearchComponent.prototype.handleKeyboardEvent = function (event) {
         var x = event.keyCode;
         if (x === 27) {
             this.outSearch();
         }
-        this.statsService.searchStats(this.searchInput.nativeElement.value);
-        if (x === 13) {
-            //Search entered
-            console.log('search entered. Key word is : ', this.searchInput.nativeElement.value);
-        }
     };
     SearchComponent.prototype.alternateSearchActivation = function (event) {
         this.onSearch();
         this.renderer.invokeElementMethod(this.searchInput.nativeElement, 'focus', []);
+    };
+    SearchComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.searchKeyword
+            .debounceTime(400)
+            .distinctUntilChanged()
+            .switchMap(function (key) {
+            return _this.statsService.searchStats(key);
+        })
+            .catch(function (error) {
+            console.log(error);
+            return Observable_1.Observable.of([]);
+        })
+            .subscribe();
+    };
+    SearchComponent.prototype.searchItems = function (keyword) {
+        this.searchKeyword.next(keyword);
     };
     SearchComponent.prototype.onSearch = function () {
         this.searchDiv.nativeElement.classList.add(this.searchActivatedClass);

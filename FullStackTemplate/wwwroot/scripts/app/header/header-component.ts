@@ -13,12 +13,12 @@ export class HeaderComponent {
     constructor() { }
 
     searchActivated(searchActivated: string) {
-        console.log('inside searchActivated. Param value is : ', searchActivated);
+        //console.log('inside searchActivated. Param value is : ', searchActivated);
         this.header.nativeElement.classList.add(this.searchActivatedClass);
     }
 
     searchDeactivated(searchEvent: string) {
-        console.log('inside searchDeactivated. Param value is : ', searchEvent);
+        //console.log('inside searchDeactivated. Param value is : ', searchEvent);
         this.header.nativeElement.classList.remove(this.searchActivatedClass);
     }
 }

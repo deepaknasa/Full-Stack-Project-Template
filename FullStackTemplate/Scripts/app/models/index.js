@@ -4,4 +4,5 @@ function __export(m) {
 }
 __export(require("./authentication-models"));
 __export(require("./session-model"));
+__export(require("./stats-model"));
 //# sourceMappingURL=index.js.map

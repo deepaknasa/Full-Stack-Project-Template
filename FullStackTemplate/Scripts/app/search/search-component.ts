@@ -6,18 +6,26 @@
     HostListener,
     ElementRef,
     ViewChild,
-    Renderer
+    Renderer,
+    OnInit
 } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 import { StatItem } from '../models/index';
 import { StatsService } from '../stats/index';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/map'
+// Observable operators
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
 
 @Component({
     selector: 'search-box',
     templateUrl: './templates/search/search-template.html',
     styleUrls: ['styles/app/search/search-style.css']
 })
-export class SearchComponent {
+export class SearchComponent implements OnInit {
     @Output('onSearchActive') searchActivated: EventEmitter<string> = new EventEmitter();
     @Output('onSearchDeactive') searchDeactivated: EventEmitter<string> = new EventEmitter();
     @ViewChild('searchBox') searchInput: ElementRef;
@@ -28,14 +36,6 @@ export class SearchComponent {
         let x = event.keyCode;
         if (x === 27) {
             this.outSearch();
-        }
-        console.log('search input ', this.searchInput.nativeElement.value);
-        this.statsService.searchStats(this.searchInput.nativeElement.value);
-        if (x === 13) {
-            //Search entered
-            console.log('search entered. Key word is : ', this.searchInput.nativeElement.value);
-            //this.statsService.searchStats(this.searchInput.nativeElement.value);
-            //this.statsService.statsUpdated.emit('statsUpdated');
         }
     }
 
@@ -49,10 +49,30 @@ export class SearchComponent {
     }
 
     searchActivatedClass: string = 'search-activated';
+    items: Observable<StatItem[]>;
 
-    searchKeyword: string;
+    private searchKeyword = new Subject<string>();
     constructor(private renderer: Renderer,
                 private statsService: StatsService) { }
+
+    ngOnInit(): void {
+        this.searchKeyword
+            .debounceTime(400)
+            .distinctUntilChanged()
+            .switchMap(key => {
+                return this.statsService.searchStats(key);
+            })
+            .catch((error) => {
+                console.log(error);
+                return Observable.of<StatItem[]>([]);
+            })
+            .subscribe();
+        
+    }
+
+    searchItems(keyword: string): void {
+        this.searchKeyword.next(keyword);
+    }
 
     onSearch() {
         this.searchDiv.nativeElement.classList.add(this.searchActivatedClass);
