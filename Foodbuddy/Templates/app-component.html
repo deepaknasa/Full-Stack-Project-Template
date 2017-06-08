@@ -1,34 +1,4 @@
-﻿<!--<md-sidenav-container class="demo-root" fullscreen>
-    <md-sidenav #start>
-        <md-nav-list>
-            <a *ngFor="let navItem of navItems"
-               md-list-item
-               (click)="start.close()"
-               [routerLink]="[navItem.route]">
-                {{navItem.name}}
-            </a>
-            <hr>
-            <a md-list-item
-               (click)="start.close()"
-               [routerLink]="['baseline']">
-                Baseline
-            </a>
-        </md-nav-list>
-        <button md-button (click)="start.close()">CLOSE</button>
-    </md-sidenav>
-    <div class="container">
-        <app-header></app-header>
-    //Main component for a primary marketing message or call to action    
-    <div class="content">
-        <router-outlet></router-outlet>
-    </div>
-
-    </div> // /container
-
-</md-sidenav-container>-->
-
-
-<div class="container">
+﻿<div class="container-fluid">
     <app-header></app-header>
     <div class="content">
         <router-outlet></router-outlet>

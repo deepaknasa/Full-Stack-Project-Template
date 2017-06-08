@@ -11,7 +11,8 @@ var gulp = require('gulp'),
     $ = require('gulp-load-plugins')(),
     sourcemaps = require('gulp-sourcemaps'),
     sass = require('gulp-sass'),
-    del = require('del');
+    del = require('del'),
+    browserSync = require('browser-sync').create();
 
 const vendorPath = 'styles/vendor/';
 
@@ -45,7 +46,7 @@ var paths = {
 
 gulp.task('lib', function () {
     return gulp.src(paths.libs).pipe(gulp.dest('wwwroot/scripts/lib'))
-        .on('end', function () { gutil.log('lib: end'); });
+        .on('end', function () { browserSync.reload(); });
 });
 
 gulp.task('app:main', function () {
@@ -55,12 +56,12 @@ gulp.task('app:main', function () {
 
 gulp.task('app', ['app:main'], function () {
     return gulp.src(paths.appScripts).pipe(gulp.dest('wwwroot/scripts/app'))
-        .on('end', function () { gutil.log('app: end'); });
+        .on('end', function () { browserSync.reload(); });
 });
 
 gulp.task('template', function () {
     return gulp.src(paths.templates).pipe(gulp.dest('wwwroot/templates'))
-        .on('end', function () { gutil.log('template: end'); });
+        .on('end', function () { browserSync.reload(); });
 });
 
 gulp.task('clean', function () {
@@ -74,7 +75,7 @@ gulp.task('template:watch', function () {
 
 gulp.task('sass:watch', function () {
     return gulp.watch(paths.styles.concat(paths.appStyles), ['sass'])
-        .on('end', function () { gutil.log('sass:watch: end'); });
+        .on('end', function () { browserSync.reload(); });
 });
 
 gulp.task('script:watch', function () {
@@ -83,8 +84,9 @@ gulp.task('script:watch', function () {
 });
 
 gulp.task('watch', function () {
+    browserSync.reload();
     return gulp.start('default', 'sass:watch', 'template:watch', 'script:watch')
-        .on('end', function () { gutil.log('watch: end'); });
+        .on('end', function () { browserSync.reload(); });
 });
 
 gulp.task('fa:font', function () {
@@ -126,13 +128,16 @@ gulp.task('sass', ['vendor:css', 'sass:appStyles'], function () {
         .pipe(sass().on('error', sass.logError))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('wwwroot/styles/'))
-        .on('end', function () { gutil.log('sass: end'); });
+        .on('end', function () { browserSync.reload(); });
         //.pipe(reload({
         //    stream: true
         //}));
 });
 
 gulp.task('default', ['clean'], function () {
+    browserSync.init({
+        proxy: "http://localhost:54975/"
+    });
     return gulp.start(['lib', 'app', 'sass', 'template', 'images'])
         .src(paths.scripts)
         .pipe(gulp.dest('wwwroot/scripts'))
