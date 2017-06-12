@@ -10,7 +10,7 @@ import {
     OnInit
 } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
-import { StatItem } from '../models/index';
+import { FoodStat } from '../models/index';
 import { StatsService } from '../stats/index';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
@@ -49,7 +49,7 @@ export class SearchComponent implements OnInit {
     }
 
     searchActivatedClass: string = 'search-activated';
-    items: Observable<StatItem[]>;
+    items: Observable<FoodStat[]>;
 
     private searchKeyword = new Subject<string>();
     constructor(private renderer: Renderer,
@@ -64,7 +64,7 @@ export class SearchComponent implements OnInit {
             })
             .catch((error) => {
                 console.log(error);
-                return Observable.of<StatItem[]>([]);
+                return Observable.of<FoodStat[]>([]);
             })
             .subscribe();
         

@@ -17,34 +17,36 @@ var StatisticsComponent = (function () {
         this._sanitizer = _sanitizer;
         this.statsService = statsService;
         this.next = 0;
-        this.statItemListLag = [];
+        this.FoodStatListLag = [];
         this.statsService.statsUpdated.subscribe(function (stats) {
-            _this.statItemList = stats;
+            _this.FoodStatList = stats;
             _this.resetItems();
         });
     }
     StatisticsComponent.prototype.ngOnInit = function () {
-        this.statItemList = this.statsService.getAllStats();
+        this.FoodStatList = this.statsService.getAllStats();
         this.resetItems();
     };
     StatisticsComponent.prototype.resetItems = function () {
         this.next = 0;
-        this.statItemListLag = [];
+        this.FoodStatListLag = [];
         this.sortItems();
         this.doNext();
     };
     StatisticsComponent.prototype.sortItems = function () {
-        this.statItemList = this.statItemList.sort(function (a, b) {
-            return a.itemStockLeft < b.itemStockLeft ? -1 : a.itemStockLeft > b.itemStockLeft ? 1 : 0;
-        });
+        if (!!this.FoodStatList && this.FoodStatList.length > 1) {
+            this.FoodStatList = this.FoodStatList.sort(function (a, b) {
+                return a.supplyLeft < b.supplyLeft ? -1 : a.supplyLeft > b.supplyLeft ? 1 : 0;
+            });
+        }
     };
     StatisticsComponent.prototype.doNext = function () {
-        if (this.next < this.statItemList.length) {
-            this.statItemListLag.push(this.statItemList[this.next++]);
+        if (!!this.FoodStatList && (this.next < this.FoodStatList.length)) {
+            this.FoodStatListLag.push(this.FoodStatList[this.next++]);
         }
     };
     StatisticsComponent.prototype.removeMe = function (i) {
-        this.statItemListLag.splice(i, 1);
+        this.FoodStatListLag.splice(i, 1);
     };
     StatisticsComponent.prototype.getBackground = function (stock) {
         var color = this.getColor(stock);

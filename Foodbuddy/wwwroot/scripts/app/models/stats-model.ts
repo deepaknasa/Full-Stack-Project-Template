@@ -1,4 +1,4 @@
-export class StatItem {
-    itemName: string;
-    itemStockLeft: number;
+export class FoodStat {
+    foodName: string;
+    supplyLeft: number;
 }

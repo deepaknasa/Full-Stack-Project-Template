@@ -57,6 +57,7 @@ AppModule = __decorate([
             index_2.AuthenticationService,
             index_4.StatsService,
             index_5.StorageService,
+            index_5.HttpService,
             index_1.RegisterModel,
             index_1.LoginModel,
             index_1.Session

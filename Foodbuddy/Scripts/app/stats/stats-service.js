@@ -13,34 +13,50 @@ var http_1 = require("@angular/http");
 require("rxjs/add/operator/map");
 var index_1 = require("../shared/index");
 var StatsService = (function () {
-    function StatsService(http, storageService) {
+    function StatsService(http, storageService, httpSvc) {
         this.http = http;
         this.storageService = storageService;
+        this.httpSvc = httpSvc;
         this.statsUpdated = new core_1.EventEmitter();
-        this.statItemList = [];
-        this.statItemList = this.storageService.getStats();
+        this.FoodStatList = [];
     }
+    //this.FoodStatList = this.storageService.getStats();
     StatsService.prototype.searchStats = function (searchKeyword) {
-        this.statItemList = this.storageService.getStats().filter(function (s) {
+        this.FoodStatList = this.storageService.getStats().filter(function (s) {
             //console.log('each item is, ', s.itemName, searchKeyword);
-            return s.itemName.includes(searchKeyword);
+            return s.foodName.includes(searchKeyword);
         });
-        this.statsUpdated.emit(this.statItemList.slice());
-        return this.statItemList.slice();
+        this.statsUpdated.emit(this.FoodStatList.slice());
+        return this.FoodStatList.slice();
     };
     StatsService.prototype.resetStats = function () {
-        this.statItemList = this.storageService.getStats();
-        this.statsUpdated.emit(this.statItemList.slice());
+        this.FoodStatList = this.storageService.getStats();
+        this.statsUpdated.emit(this.FoodStatList.slice());
     };
     StatsService.prototype.getAllStats = function () {
-        return this.storageService.getStats();
+        var _this = this;
+        var storageData = this.storageService.getStats();
+        if (!!storageData == false) {
+            this.httpSvc.getService('food/getFoodItems').subscribe(function (val) {
+                console.log('data returned in stats service');
+                var stats = JSON.parse(val.text());
+                console.log('stats: ', stats);
+                _this.storageService.setStats(stats);
+                _this.FoodStatList = stats;
+                _this.statsUpdated.emit(_this.FoodStatList.slice());
+            });
+        }
+        else {
+            return storageData;
+        }
     };
     return StatsService;
 }());
 StatsService = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [http_1.Http,
-        index_1.StorageService])
+        index_1.StorageService,
+        index_1.HttpService])
 ], StatsService);
 exports.StatsService = StatsService;
 //# sourceMappingURL=stats-service.js.map

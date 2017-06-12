@@ -1,0 +1,5 @@
+obj/*
+Properties/
+bin/
+bin/Debug/
+bin/Debug/netcoreapp1.1

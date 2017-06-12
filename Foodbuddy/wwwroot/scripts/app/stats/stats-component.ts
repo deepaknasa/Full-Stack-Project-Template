@@ -16,7 +16,7 @@ import {
     OnInit
 } from '@angular/core';
 import { DOCUMENT, DomSanitizer } from '@angular/platform-browser';
-import { StatItem } from '../models/index';
+import { FoodStat } from '../models/index';
 import { StatsService } from './stats-service';
 
 @Component({
@@ -44,42 +44,44 @@ import { StatsService } from './stats-service';
 export class StatisticsComponent implements OnInit {
     @ViewChild('stockLeft') leftStock: ElementRef;
 
-    statItemList: StatItem[];
+    FoodStatList: FoodStat[];
     next: number = 0;
-    statItemListLag: any[] = [];
+    FoodStatListLag: any[] = [];
 
     constructor(private _sanitizer: DomSanitizer, private statsService: StatsService) {
-        this.statsService.statsUpdated.subscribe((stats: StatItem[]) => {
-            this.statItemList = stats;
+        this.statsService.statsUpdated.subscribe((stats: FoodStat[]) => {
+            this.FoodStatList = stats;
             this.resetItems();
         });
     }
 
     ngOnInit() {
-        this.statItemList = this.statsService.getAllStats();
+        this.FoodStatList = this.statsService.getAllStats();
         this.resetItems();
     }
 
     resetItems(): void {
         this.next = 0;
-        this.statItemListLag = [];
+        this.FoodStatListLag = [];
         this.sortItems();
         this.doNext();
     }
 
     sortItems() {
-        this.statItemList = this.statItemList.sort((a, b) =>
-            a.itemStockLeft < b.itemStockLeft ? -1 : a.itemStockLeft > b.itemStockLeft ? 1 : 0);
+        if (!!this.FoodStatList && this.FoodStatList.length > 1) {
+            this.FoodStatList = this.FoodStatList.sort((a, b) =>
+                a.supplyLeft < b.supplyLeft ? -1 : a.supplyLeft > b.supplyLeft ? 1 : 0);
+        }
     }
 
     doNext() {
-        if (this.next < this.statItemList.length) {
-            this.statItemListLag.push(this.statItemList[this.next++]);
+        if (!!this.FoodStatList && (this.next < this.FoodStatList.length)) {
+            this.FoodStatListLag.push(this.FoodStatList[this.next++]);
         }
     }
 
     removeMe(i: number) {
-        this.statItemListLag.splice(i, 1);
+        this.FoodStatListLag.splice(i, 1);
     }
 
     getBackground(stock: number) {

@@ -1,4 +1,4 @@
-/// <binding AfterBuild='default' Clean='clean' />
+/// <binding Clean='clean' />
 /*
 This file is the main entry point for defining Gulp tasks and using Gulp plugins.
 Click here to learn more. https://go.microsoft.com/fwlink/?LinkId=518007
@@ -12,16 +12,19 @@ var gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
     sass = require('gulp-sass'),
     del = require('del'),
+    typescript = require('gulp-tsc'),
     browserSync = require('browser-sync').create();
 
 const vendorPath = 'styles/vendor/';
+const typescriptFiles = 'scripts/app-link/**/*.ts';
 
 var paths = {
-    appScripts: ['scripts/app-link/**/*.ts',
+    appScripts: [typescriptFiles,
         'scripts/app-link/**/*.js',
         'scripts/app-link/**/*.map'
     ],
     appStyles: ['scripts/app-link/**/*.scss'],
+    appScriptDestination: ['wwwroot/scripts/app'],
     scripts: [
         'scripts/main.js',
         'scripts/main.ts',
@@ -44,18 +47,24 @@ var paths = {
         'node_modules/systemjs/dist/system.src.js']
 };
 
+gulp.task('ts:compile', function () {
+    //return gulp.src([typescriptFiles])
+    //    .pipe(typescript())
+    //    .pipe(gulp.dest(paths.appScriptDestination[0]));
+});
+
 gulp.task('lib', function () {
     return gulp.src(paths.libs).pipe(gulp.dest('wwwroot/scripts/lib'))
         .on('end', function () { browserSync.reload(); });
 });
 
-gulp.task('app:main', function () {
+gulp.task('app:main', ['ts:compile'], function () {
     return gulp.src(paths.scripts).pipe(gulp.dest('wwwroot/scripts'))
         .on('end', function () { gutil.log('app:main: end'); });
 });
 
 gulp.task('app', ['app:main'], function () {
-    return gulp.src(paths.appScripts).pipe(gulp.dest('wwwroot/scripts/app'))
+    return gulp.src(paths.appScripts).pipe(gulp.dest(paths.appScriptDestination[0]))
         .on('end', function () { browserSync.reload(); });
 });
 
@@ -84,7 +93,10 @@ gulp.task('script:watch', function () {
 });
 
 gulp.task('watch', function () {
-    browserSync.reload();
+    browserSync.init({
+        proxy: "http://localhost:54976/"
+    });
+
     return gulp.start('default', 'sass:watch', 'template:watch', 'script:watch')
         .on('end', function () { browserSync.reload(); });
 });
@@ -135,9 +147,6 @@ gulp.task('sass', ['vendor:css', 'sass:appStyles'], function () {
 });
 
 gulp.task('default', ['clean'], function () {
-    browserSync.init({
-        proxy: "http://localhost:54975/"
-    });
     return gulp.start(['lib', 'app', 'sass', 'template', 'images'])
         .src(paths.scripts)
         .pipe(gulp.dest('wwwroot/scripts'))

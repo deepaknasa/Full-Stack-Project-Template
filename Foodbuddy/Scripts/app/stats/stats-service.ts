@@ -2,34 +2,47 @@
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
-import { StatItem } from '../models/index'
-import { StorageService } from '../shared/index'
+import { FoodStat } from '../models/index'
+import { StorageService, HttpService } from '../shared/index'
 
 @Injectable()
 export class StatsService {
-    statsUpdated: EventEmitter<StatItem[]> = new EventEmitter();
-    statItemList: StatItem[] = [];
+    statsUpdated: EventEmitter<FoodStat[]> = new EventEmitter();
+    FoodStatList: FoodStat[] = [];
 
     constructor(private http: Http,
-        private storageService: StorageService) {
-        this.statItemList = this.storageService.getStats();
-    }
+        private storageService: StorageService,
+        private httpSvc: HttpService) {}
+        //this.FoodStatList = this.storageService.getStats();
 
-    searchStats(searchKeyword: string): StatItem[] {
-        this.statItemList = this.storageService.getStats().filter(function (s) {
+    searchStats(searchKeyword: string): FoodStat[] {
+        this.FoodStatList = this.storageService.getStats().filter(function (s) {
             //console.log('each item is, ', s.itemName, searchKeyword);
-            return s.itemName.includes(searchKeyword);
+            return s.foodName.includes(searchKeyword);
         });
-        this.statsUpdated.emit(this.statItemList.slice());
-        return this.statItemList.slice();
+        this.statsUpdated.emit(this.FoodStatList.slice());
+        return this.FoodStatList.slice();
     }
 
     resetStats() {
-        this.statItemList = this.storageService.getStats();
-        this.statsUpdated.emit(this.statItemList.slice());
+        this.FoodStatList = this.storageService.getStats();
+        this.statsUpdated.emit(this.FoodStatList.slice());
     }
 
-    getAllStats(): StatItem[] {
-        return this.storageService.getStats();
+    getAllStats(): FoodStat[] {
+        let storageData = this.storageService.getStats();
+        if (!!storageData == false) {
+            this.httpSvc.getService('food/getFoodItems').subscribe(val => {
+                console.log('data returned in stats service');
+                let stats: FoodStat[] = JSON.parse(val.text());
+                console.log('stats: ', stats);
+                this.storageService.setStats(stats);
+                this.FoodStatList = stats;
+                this.statsUpdated.emit(this.FoodStatList.slice());
+            });
+        }
+        else {
+            return storageData;
+        }
     }
 }

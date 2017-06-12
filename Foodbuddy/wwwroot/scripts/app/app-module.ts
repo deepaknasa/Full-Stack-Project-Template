@@ -27,7 +27,7 @@ import { SearchComponent } from './search/index';
 import { StatisticsComponent, StatsService } from './stats/index';
 
 //Storage service
-import { StorageService } from './shared/index';
+import { StorageService, HttpService } from './shared/index';
 
 //Application header
 import { HeaderComponent } from './header/index';
@@ -48,6 +48,7 @@ import { DEMO_APP_ROUTES } from './routes';
         AuthenticationService,
         StatsService,
         StorageService,
+        HttpService,
         RegisterModel,
         LoginModel,
         Session

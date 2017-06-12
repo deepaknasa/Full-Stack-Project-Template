@@ -11,9 +11,13 @@
 	<UserSecretsId>My-USER-SECRET-ID-HERE-c23d27a4-eb88</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Data\**" />
     <Compile Remove="Styles\vendor\bootstrap-4.0.0-alpha.6\**" />
+    <Content Remove="Data\**" />
     <Content Remove="Styles\vendor\bootstrap-4.0.0-alpha.6\**" />
+    <EmbeddedResource Remove="Data\**" />
     <EmbeddedResource Remove="Styles\vendor\bootstrap-4.0.0-alpha.6\**" />
+    <None Remove="Data\**" />
     <None Remove="Styles\vendor\bootstrap-4.0.0-alpha.6\**" />
   </ItemGroup>
   <ItemGroup>
@@ -30,18 +34,22 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="1.1.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="1.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="1.1.0" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Data\Data.csproj" />
   </ItemGroup>
 
 </Project>

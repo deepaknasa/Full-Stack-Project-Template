@@ -1,5 +1,4 @@
-﻿using Foodbuddy.Data;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -11,12 +10,13 @@ using Microsoft.EntityFrameworkCore;
 using Foodbuddy.Services;
 using Foodbuddy.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Data.Context;
+//using Data.Extensions;
 
 namespace Foodbuddy
 {
     public class Startup
     {
-        string _testSecret = null;
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -40,13 +40,13 @@ namespace Foodbuddy
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<FoodbuddyContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-            
+            //services.AddIdentity<ApplicationUser, IdentityRole>()
+            //    .AddEntityFrameworkStores<ApplicationDbContext>()
+            //    .AddDefaultTokenProviders();
+
             services.AddMvc();
 
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -61,6 +61,13 @@ namespace Foodbuddy
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                {
+                    //var context = serviceScope.ServiceProvider.GetService<FoodbuddyContext>();
+                    //context.Database.Migrate();
+                    //context.EnsureSeedData();
+                }
             }
             else
             {
@@ -69,7 +76,7 @@ namespace Foodbuddy
 
             app.UseStaticFiles();
 
-            app.UseIdentity();
+            //app.UseIdentity();
 
             app.UseFileServer(new FileServerOptions
             {
@@ -84,6 +91,7 @@ namespace Foodbuddy
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
         }
     }
 }

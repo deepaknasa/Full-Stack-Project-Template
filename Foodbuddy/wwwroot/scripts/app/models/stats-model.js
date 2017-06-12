@@ -1,8 +1,8 @@
 "use strict";
-var StatItem = (function () {
-    function StatItem() {
+var FoodStat = (function () {
+    function FoodStat() {
     }
-    return StatItem;
+    return FoodStat;
 }());
-exports.StatItem = StatItem;
+exports.FoodStat = FoodStat;
 //# sourceMappingURL=stats-model.js.map
