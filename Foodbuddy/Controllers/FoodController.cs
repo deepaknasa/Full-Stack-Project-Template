@@ -27,14 +27,15 @@ namespace Foodbuddy.Controllers
                         join fUnit in _db.FoodUnit on f.Rowguid equals fUnit.GnuFoodItem
                         join consumption in _db.Consumption on fUnit.Rowguid equals consumption.GnuFoodUnit
                         join supply in _db.FoodSupply on fUnit.Rowguid equals supply.GnuFoodUnit
-                        let daysElapsed = (int)(DateTime.UtcNow.Date - supply.DteSuppliedOn.Date).TotalDays
-                        //let daysElapsed = 2
+                        let suppliedOn = TimeSpan.FromTicks(supply.DteSuppliedOn.Ticks)
+                        let today = TimeSpan.FromTicks(DateTime.Now.Ticks)
+                        let daysElapsed = (int)(today - suppliedOn).TotalDays
                         let consumptionDays = supply.IntQuantity * consumption.IntConsumptionDays
                         select new FoodStat
                         {
                             FoodGuid = f.Rowguid,
                             foodName = f.TxtName,
-                            supplyLeft = (daysElapsed * 100) / consumptionDays
+                            supplyLeft = ((consumptionDays - daysElapsed) * 100) / consumptionDays
                         };
 
             return foods;

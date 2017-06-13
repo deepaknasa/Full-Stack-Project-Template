@@ -65,11 +65,11 @@ namespace Data.Context
 
                 entity.Property(e => e.DteCreatedOn)
                     .HasColumnName("dteCreatedOn")
-                    .HasColumnType("date");
+                    .HasColumnType("datetime2");
 
                 entity.Property(e => e.DteLastUpdateOn)
                     .HasColumnName("dteLastUpdateOn")
-                    .HasColumnType("date");
+                    .HasColumnType("datetime2");
 
                 entity.Property(e => e.TxtDescription)
                     .HasColumnName("txtDescription")
@@ -92,7 +92,7 @@ namespace Data.Context
 
                 entity.Property(e => e.DteSuppliedOn)
                     .HasColumnName("dteSuppliedOn")
-                    .HasColumnType("date");
+                    .HasColumnType("datetime");
 
                 entity.Property(e => e.GnuFoodUnit).HasColumnName("gnuFoodUnit");
 
@@ -118,11 +118,11 @@ namespace Data.Context
 
                 entity.Property(e => e.DteCreatedOn)
                     .HasColumnName("dteCreatedOn")
-                    .HasColumnType("date");
+                    .HasColumnType("datetime2");
 
                 entity.Property(e => e.DteLastUpdateOn)
                     .HasColumnName("dteLastUpdateOn")
-                    .HasColumnType("date");
+                    .HasColumnType("datetime2");
 
                 entity.Property(e => e.GnuFoodItem).HasColumnName("gnuFoodItem");
 
@@ -178,7 +178,7 @@ namespace Data.Context
 
                 entity.Property(e => e.DteCreatedOn)
                     .HasColumnName("dteCreatedOn")
-                    .HasColumnType("date");
+                    .HasColumnType("datetime2");
 
                 entity.Property(e => e.TxtDescription)
                     .HasColumnName("txtDescription")

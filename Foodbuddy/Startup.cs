@@ -11,7 +11,7 @@ using Foodbuddy.Services;
 using Foodbuddy.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Data.Context;
-//using Data.Extensions;
+using Data.Extensions;
 
 namespace Foodbuddy
 {
@@ -64,9 +64,9 @@ namespace Foodbuddy
 
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
-                    //var context = serviceScope.ServiceProvider.GetService<FoodbuddyContext>();
+                    var context = serviceScope.ServiceProvider.GetService<FoodbuddyContext>();
                     //context.Database.Migrate();
-                    //context.EnsureSeedData();
+                    context.Seed();
                 }
             }
             else
