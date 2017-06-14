@@ -30,6 +30,14 @@ header {
     .food-component {
         padding: 5px;
     }
+
+    .auth-component {
+        padding: 5px;
+        margin-top: 3px;
+        .g-signin2 {
+            line-height: 0;
+        }
+    }
 }
 
 header.search-activated {

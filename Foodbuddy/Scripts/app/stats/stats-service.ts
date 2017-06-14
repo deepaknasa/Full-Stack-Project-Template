@@ -18,7 +18,7 @@ export class StatsService {
     searchStats(searchKeyword: string): FoodStat[] {
         this.FoodStatList = this.storageService.getStats().filter(function (s) {
             //console.log('each item is, ', s.itemName, searchKeyword);
-            return s.foodName.includes(searchKeyword);
+            return s.foodName.toLowerCase().includes(searchKeyword.toLowerCase());
         });
         this.statsUpdated.emit(this.FoodStatList.slice());
         return this.FoodStatList.slice();
