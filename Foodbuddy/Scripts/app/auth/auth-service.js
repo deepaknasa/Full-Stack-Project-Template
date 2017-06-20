@@ -22,7 +22,7 @@ var AuthenticationService = (function () {
         this.sessionUpdate = new core_1.EventEmitter();
         this._session = session;
     }
-    AuthenticationService.prototype.login = function (model) {
+    AuthenticationService.prototype.login = function (model, updatedSession) {
         var _this = this;
         var body = JSON.stringify({ Email: model.email, Password: model.password, RememberMe: model.rememberMe });
         var headers = new http_1.Headers({ 'Content-Type': 'application/json; charset=utf-8' });
@@ -33,7 +33,7 @@ var AuthenticationService = (function () {
             console.log('user response:', response.text());
             if (response && response.status === 200) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
-                _this.storageService.setCurrentUser(response.text());
+                _this.setCurrentUser(updatedSession, response.text());
                 _this.sessionUpdated();
                 console.log('emit:event:sessionUpdated', _this._session);
             }
@@ -43,35 +43,38 @@ var AuthenticationService = (function () {
         this.sessionUpdate.emit(this._session);
     };
     AuthenticationService.prototype.logout = function () {
-        var _this = this;
-        try {
-            return this.http.post('/Account/Logout', JSON.stringify({}))
-                .map(function (response) {
-                console.log('user response:', response.text());
-                if (response && response.status === 200) {
-                    // remove user from local storage to log user out
-                    _this.storageService.clearSession();
-                    _this.sessionUpdated();
-                }
-            })
-                .catch(function (error) {
-                console.log('error is logout', error);
-                var errMsg;
-                if (error instanceof http_1.Response) {
-                    var body = error.json() || '';
-                    var err = body.error || JSON.stringify(body);
-                    errMsg = error.status + " - " + (error.statusText || '') + " " + err;
-                }
-                else {
-                    errMsg = error.message ? error.message : error.toString();
-                }
-                console.error(errMsg);
-                return Observable_1.Observable.throw(errMsg);
-            });
-        }
-        catch (e) {
-            console.log(e);
-        }
+        this.logoutUser();
+        return Observable_1.Observable.of('');
+        //try {
+        //return this.http.post('/Account/Logout', JSON.stringify({}))
+        //    .map((response: Response) => {
+        //        console.log('user response:', response.text());
+        //        if (response && response.status === 200) {
+        //            // remove user from local storage to log user out
+        //            this.logoutUser();
+        //        }
+        //    })
+        //    .catch((error: Response | any) => {
+        //        console.log('error is logout', error);
+        //        let errMsg: string;
+        //        if (error instanceof Response) {
+        //            const body = error.json() || '';
+        //            const err = body.error || JSON.stringify(body);
+        //            errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+        //        } else {
+        //            errMsg = error.message ? error.message : error.toString();
+        //        }
+        //        console.error(errMsg);
+        //        return Observable.throw(errMsg);
+        //    });
+        //} catch (e) {
+        //    console.log(e);
+        //}
+    };
+    AuthenticationService.prototype.logoutUser = function () {
+        this.storageService.clearSession();
+        this.clearSession();
+        this.sessionUpdated();
     };
     AuthenticationService.prototype.isLoggedIn = function () {
         return !!this.storageService.getCurrentUser();
@@ -99,10 +102,10 @@ var AuthenticationService = (function () {
         this._session.userName = this.storageService.getCurrentUser();
         return this._session;
     };
-    AuthenticationService.prototype.setCurrentUser = function (user) {
+    AuthenticationService.prototype.setCurrentUser = function (updatedSession, user) {
         this.storageService.setCurrentUser(user);
-        this._session.userName = user;
-        this._session.isLoggedIn = true;
+        this._session = updatedSession;
+        //this._session.isLoggedIn = true;
     };
     AuthenticationService.prototype.clearSession = function () {
         this.storageService.clearSession();

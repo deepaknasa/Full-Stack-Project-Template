@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" />
-    <meta name="google-signin-client_id" content="141746026166-knp1e85dt0kmvp2db21u5afa0l3jk565.apps.googleusercontent.com">
+    @*<meta name="google-signin-client_id" content="141746026166-knp1e85dt0kmvp2db21u5afa0l3jk565.apps.googleusercontent.com">*@
     <title>@ViewData["Title"] - Foodbuddy</title>
     <link href="~/styles/vendor/bootstrap.css" rel="stylesheet" />
     <link href="~/styles/site.css" rel="stylesheet" />
@@ -19,8 +19,12 @@
     <link href="~/styles/vendor/fonts/FontAwesome.otf" rel="font/otf">
 
     <!-- Google sign in API -->
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    @*<script src="https://apis.google.com/js/platform.js" async defer></script>*@
+    @*<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">*@
+    <script src="~/styles/vendor/scripts/api-client.js"></script>
+    <script src="~/styles/vendor/scripts/jquery-3.2.1.min.js"></script>
+    <script src="~/styles/vendor/scripts/bootstrap.min.js"></script>
+
     <!-- Polyfill(s) for older browsers -->
     <script src="~/scripts/lib/shim.min.js"></script>
 
@@ -53,6 +57,14 @@
     <dev>
         @RenderSection("Scripts", required: false)
     </dev>
-    <script type="text/javascript" id="google-signin"></script>
+    <script type="text/javascript" id="google-signin">
+        //function onSignIn(googleUser) {
+        //    var profile = googleUser.getBasicProfile();
+        //    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        //    console.log('Name: ' + profile.getName());
+        //    console.log('Image URL: ' + profile.getImageUrl());
+        //    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+        //}
+    </script>
 </body>
 </html>

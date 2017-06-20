@@ -94,7 +94,7 @@ var LoginDialog = (function () {
     LoginDialog.prototype.login = function () {
         var _this = this;
         this.loading = true;
-        this.authenticationService.login(this.model)
+        this.authenticationService.login(this.model, null)
             .subscribe(function (data) {
             //this.router.navigate([this.returnUrl]);
             console.log('data', data);

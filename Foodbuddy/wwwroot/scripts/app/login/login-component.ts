@@ -78,14 +78,14 @@ export class LoginDialog {
 
     login() {
         this.loading = true;
-        this.authenticationService.login(this.model)
+        this.authenticationService.login(this.model, null)
             .subscribe(
-                data => {
+            (data: any) => {
                     //this.router.navigate([this.returnUrl]);
                     console.log('data', data);
                     this.dialogRef.close('Logged in');
-                },
-                error => {
+            },
+            (error: any) => {
                     console.log('login failed');
                     this.loginError = 'Login failed due to server error. Please try again.';
                     this.loading = false;

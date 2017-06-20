@@ -56,8 +56,8 @@ export class StatisticsComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.FoodStatList = this.statsService.getAllStats();
-        this.resetItems();
+        //this.FoodStatList = this.statsService.getAllStats();
+        //this.resetItems();
     }
 
     resetItems(): void {

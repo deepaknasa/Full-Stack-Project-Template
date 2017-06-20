@@ -33,6 +33,7 @@ var paths = {
     ],
     styles: ['styles/site.scss'],
     vendor: [vendorPath + '*.css'],
+    vendorJs: [vendorPath + 'scripts/*.js'],
     fa_css: [vendorPath + 'css/font-awesome.min.css'],
     fa_font: [vendorPath + 'fonts/FontAwesome.otf', vendorPath + 'fonts/fontawesome-webfont.eot', vendorPath + 'fonts/fontawesome-webfont.svg', vendorPath + 'fonts/fontawesome-webfont.ttf', vendorPath + 'fonts/fontawesome-webfont.woff', vendorPath + 'fonts/fontawesome-webfont.woff2'],
     templates: ['templates/**/*.html'],
@@ -63,7 +64,7 @@ gulp.task('app:main', ['ts:compile'], function () {
         .on('end', function () { gutil.log('app:main: end'); });
 });
 
-gulp.task('app', ['app:main'], function () {
+gulp.task('app', ['app:main', 'vendor:script'], function () {
     return gulp.src(paths.appScripts).pipe(gulp.dest(paths.appScriptDestination[0]))
         .on('end', function () { browserSync.reload(); });
 });
@@ -78,16 +79,16 @@ gulp.task('clean', function () {
         //.on('end', function () { gutil.log('clean: end'); });
 });
 
-gulp.task('template:watch', function () {
+gulp.task('template:watch', ['clean'], function () {
     return gulp.watch(paths.templates, ['template']).on('end', function () { gutil.log('template:watch: end'); });
 });
 
-gulp.task('sass:watch', function () {
+gulp.task('sass:watch', ['clean'], function () {
     return gulp.watch(paths.styles.concat(paths.appStyles), ['sass'])
         .on('end', function () { browserSync.reload(); });
 });
 
-gulp.task('script:watch', function () {
+gulp.task('script:watch', ['clean'], function () {
     return gulp.watch(paths.appScripts, ['app'])
         .on('end', function () { gutil.log('script:watch: end'); });
 });
@@ -117,6 +118,11 @@ gulp.task('vendor:css', ['fa:font', 'fa:css'], function () {
     return gulp.src(paths.vendor)
         .pipe(gulp.dest('wwwroot/styles/vendor'))
         .on('end', function () { gutil.log('vendor:css: end'); });
+});
+
+gulp.task('vendor:script', function () {
+    return gulp.src(paths.vendorJs)
+        .pipe(gulp.dest('wwwroot/styles/vendor/scripts'));
 });
 
 gulp.task('images', function () {

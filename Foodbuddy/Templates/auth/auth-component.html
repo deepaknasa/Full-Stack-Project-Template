@@ -1,12 +1,30 @@
 ﻿<div *ngIf="_session.isLoggedIn; else unloggedUser">
-    <ul class="">
-        <li><a>Hello {{_session.userName}}</a></li>
+    <!--<ul class="logged-in">
+        <li><a>Hello {{_session.displayName}}</a></li>
         <li><button type="button" class="btn btn-link navbar-btn navbar-link" [routerLink]="['/logout']"><i class="fa fa-sign-out" aria-hidden="true"></i></button></li>
-    </ul>
+    </ul>-->
+    <div class="account-btn">
+        <div class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown">
+                <img [src]="_session.imageUrl" />
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#">My Account</a></li>
+                <li class="divider"></li>
+                <li><a (click)="signOut()">Sign Out</a></li>
+            </ul>
+        </div>
+    </div>
 </div>
 <ng-template #unloggedUser>
     <ul class="login-btn">
         <!--<li><a md-button [routerLink]="['/register']">Register</a></li>-->
-        <li><a [routerLink]="['/login']"><i class="fa fa-sign-in" aria-hidden="true"></i></a></li><!--(click)="openLoginDialog()"-->
+        <!--<li><a [routerLink]="['/login']"><i class="fa fa-sign-in" aria-hidden="true"></i></a></li>-->
+        <li>
+            <div id="google-login-button" class="customGPlusSignIn" #googleLoginBtn>
+                <i class="fa fa-sign-in" aria-hidden="true"></i>
+            </div>
+            <!--<div id="google-login-button" class="g-signin2"></div>-->
+        </li>
     </ul>
 </ng-template>
