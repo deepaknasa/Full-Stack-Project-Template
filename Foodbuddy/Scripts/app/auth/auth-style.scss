@@ -15,8 +15,12 @@ ul.login-btn {
 }
 
 .account-btn {
-    img {
-        height: 30px;
-        width: 30px;
+    .image-section {
+        float: right;
+        img {
+            height: 30px;
+            width: 30px;
+            border-radius: 12px;
+        }
     }
 }
