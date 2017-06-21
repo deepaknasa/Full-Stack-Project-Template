@@ -1,4 +1,5 @@
 import { FoodStat } from '../models/index'
+import { Session } from '../models/index';
 
 export class StorageService {
 
@@ -26,12 +27,13 @@ export class StorageService {
         
     }
 
-    getCurrentUser() {
-        return localStorage.getItem(this._currentUserKey);
+    getCurrentUser(): Session {
+        let userSession: Session = JSON.parse(localStorage.getItem(this._currentUserKey));
+        return userSession;
     }
 
-    setCurrentUser(user: string) {
-        localStorage.setItem(this._currentUserKey, user);
+    setCurrentUser(userSession: Session) {
+        localStorage.setItem(this._currentUserKey, JSON.stringify(userSession));
     }
 
     clearSession() {

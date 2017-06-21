@@ -27,7 +27,7 @@ export class AuthenticationService {
                 console.log('user response:', response.text());
                 if (response && response.status === 200) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    this.setCurrentUser(updatedSession, response.text());
+                    this.setCurrentUser(updatedSession);
                     this.sessionUpdated();
                     console.log('emit:event:sessionUpdated', this._session);
                 }
@@ -93,20 +93,29 @@ export class AuthenticationService {
                 if (response && response.status === 200) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
 
-                    this.storageService.setCurrentUser(response.text());
+                    let userSession: Session = new Session();
+                    userSession.userName = response.text();
+                    this.storageService.setCurrentUser(userSession);
                     this.sessionUpdated();
                 }
             });
     }
 
     getUserSession(): Session {
-        this._session.isLoggedIn = this.isLoggedIn();
-        this._session.userName = this.storageService.getCurrentUser();
+        if (!this._session) {
+            this._session = new Session();
+            this._session.isLoggedIn = false;
+        } else {
+            this._session.isLoggedIn = this.isLoggedIn();
+            if (this._session.isLoggedIn) {
+                this._session = this.storageService.getCurrentUser();
+            }
+        }
         return this._session;
     }
 
-    setCurrentUser(updatedSession: Session, user: string) {
-        this.storageService.setCurrentUser(user);
+    setCurrentUser(updatedSession: Session) {
+        this.storageService.setCurrentUser(updatedSession);
         this._session = updatedSession;
         //this._session.isLoggedIn = true;
     }

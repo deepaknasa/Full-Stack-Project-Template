@@ -33,7 +33,7 @@ var AuthenticationService = (function () {
             console.log('user response:', response.text());
             if (response && response.status === 200) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
-                _this.setCurrentUser(updatedSession, response.text());
+                _this.setCurrentUser(updatedSession);
                 _this.sessionUpdated();
                 console.log('emit:event:sessionUpdated', _this._session);
             }
@@ -92,18 +92,28 @@ var AuthenticationService = (function () {
             console.log('user response:', response.text());
             if (response && response.status === 200) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
-                _this.storageService.setCurrentUser(response.text());
+                var userSession = new index_1.Session();
+                userSession.userName = response.text();
+                _this.storageService.setCurrentUser(userSession);
                 _this.sessionUpdated();
             }
         });
     };
     AuthenticationService.prototype.getUserSession = function () {
-        this._session.isLoggedIn = this.isLoggedIn();
-        this._session.userName = this.storageService.getCurrentUser();
+        if (!this._session) {
+            this._session = new index_1.Session();
+            this._session.isLoggedIn = false;
+        }
+        else {
+            this._session.isLoggedIn = this.isLoggedIn();
+            if (this._session.isLoggedIn) {
+                this._session = this.storageService.getCurrentUser();
+            }
+        }
         return this._session;
     };
-    AuthenticationService.prototype.setCurrentUser = function (updatedSession, user) {
-        this.storageService.setCurrentUser(user);
+    AuthenticationService.prototype.setCurrentUser = function (updatedSession) {
+        this.storageService.setCurrentUser(updatedSession);
         this._session = updatedSession;
         //this._session.isLoggedIn = true;
     };

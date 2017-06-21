@@ -18,10 +18,11 @@ var StorageService = (function () {
         }
     };
     StorageService.prototype.getCurrentUser = function () {
-        return localStorage.getItem(this._currentUserKey);
+        var userSession = JSON.parse(localStorage.getItem(this._currentUserKey));
+        return userSession;
     };
-    StorageService.prototype.setCurrentUser = function (user) {
-        localStorage.setItem(this._currentUserKey, user);
+    StorageService.prototype.setCurrentUser = function (userSession) {
+        localStorage.setItem(this._currentUserKey, JSON.stringify(userSession));
     };
     StorageService.prototype.clearSession = function () {
         localStorage.removeItem(this._currentUserKey);
