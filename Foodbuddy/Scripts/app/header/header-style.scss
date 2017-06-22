@@ -33,9 +33,16 @@ header {
 
     .auth-component {
         padding: 5px;
-        
+
         .g-signin2 {
             line-height: 0;
+        }
+    }
+
+    .header-ellipsis {
+        i {
+            font-size: 26px;
+            color: grey;
         }
     }
 }

@@ -16,6 +16,7 @@ export class AppComponent {
 
 @Component({
   selector: 'home',
-  template: `<h1>THis is home page</h1>`
+  templateUrl: './templates/home.html',
+  styleUrls: ['styles/app/app-styles.css']
 })
 export class HomeComponent {}

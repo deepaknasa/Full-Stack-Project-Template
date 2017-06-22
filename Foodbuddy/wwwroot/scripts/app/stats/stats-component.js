@@ -24,8 +24,8 @@ var StatisticsComponent = (function () {
         });
     }
     StatisticsComponent.prototype.ngOnInit = function () {
-        //this.FoodStatList = this.statsService.getAllStats();
-        //this.resetItems();
+        this.FoodStatList = this.statsService.getAllStats();
+        this.resetItems();
     };
     StatisticsComponent.prototype.resetItems = function () {
         this.next = 0;

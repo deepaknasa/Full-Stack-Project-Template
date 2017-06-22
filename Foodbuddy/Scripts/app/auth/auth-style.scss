@@ -15,12 +15,23 @@ ul.login-btn {
 }
 
 .account-btn {
+    .dropdown-menu {
+        left: -96px;
+    }
+
+    .dropdown {
+        width: 90%;
+        float: right;
+    }
+
     .image-section {
         float: right;
+        width: 72%;
+
         img {
-            height: 30px;
-            width: 30px;
+            max-width: 100%;
             border-radius: 12px;
         }
     }
 }
+
