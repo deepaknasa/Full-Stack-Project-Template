@@ -49,6 +49,10 @@ namespace Foodbuddy
 
             services.AddMvc();
 
+            services.AddSwaggerGen(c => {
+                c.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info { Title = "WebApi", Version = "v1" });
+            });
+
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
         }
@@ -92,6 +96,10 @@ namespace Foodbuddy
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApi");
+            });
         }
     }
 }

@@ -48,7 +48,7 @@ AppModule = __decorate([
         imports: [
             platform_browser_1.BrowserModule,
             forms_1.FormsModule,
-            router_1.RouterModule.forRoot(routes_1.DEMO_APP_ROUTES),
+            router_1.RouterModule.forRoot(routes_1.APP_ROUTES),
             material_1.MaterialModule,
             animations_1.BrowserAnimationsModule
         ],
@@ -64,7 +64,7 @@ AppModule = __decorate([
         ],
         declarations: [
             app_component_1.AppComponent,
-            app_component_1.Home,
+            app_component_1.HomeComponent,
             index_2.AuthComponent,
             login_component_1.LoginComponent,
             login_component_1.LogoutComponent,

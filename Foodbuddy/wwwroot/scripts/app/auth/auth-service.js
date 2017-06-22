@@ -102,10 +102,13 @@ var AuthenticationService = (function () {
     AuthenticationService.prototype.getUserSession = function () {
         if (!this._session) {
             this._session = new index_1.Session();
+            this._session.isLoggedIn = false;
         }
-        this._session.isLoggedIn = this.isLoggedIn();
-        if (this._session.isLoggedIn) {
-            this._session = this.storageService.getCurrentUser();
+        else {
+            this._session.isLoggedIn = this.isLoggedIn();
+            if (this._session.isLoggedIn) {
+                this._session = this.storageService.getCurrentUser();
+            }
         }
         return this._session;
     };

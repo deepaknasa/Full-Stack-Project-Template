@@ -16,6 +16,6 @@ export class AppComponent {
 
 @Component({
   selector: 'home',
-  template: ``
+  template: `<h1>THis is home page</h1>`
 })
-export class Home {}
+export class HomeComponent {}

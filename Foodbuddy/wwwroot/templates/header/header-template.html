@@ -6,7 +6,7 @@
                     <i class="fa fa-bars" aria-hidden="true"></i>
                 </a>
             </div>
-            <div class="col-md-9 menu-logo">
+            <div class="col-md-9 menu-logo" [routerLink]="['/']">
                 <!--<i class="fa fa-font-awesome" aria-hidden="true"></i>-->
                 <h3>food-Buddy</h3>
             </div>
@@ -21,7 +21,7 @@
                     <a><i class="fa fa-plus-square-o" aria-hidden="true"></i></a>
                 </div>
                 <div class="col-xs-6 stat-chart">
-                    <a><i class="fa fa-bar-chart" aria-hidden="true"></i></a>
+                    <a [routerLink]="['/stats']"><i class="fa fa-bar-chart" aria-hidden="true"></i></a>
                 </div>
             </div>
             <div class="col-xs-offset-2 col-md-5 auth-component">

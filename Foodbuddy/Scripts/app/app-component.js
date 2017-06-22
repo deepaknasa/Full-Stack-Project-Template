@@ -27,16 +27,16 @@ AppComponent = __decorate([
     __metadata("design:paramtypes", [index_1.Session, index_2.AuthenticationService])
 ], AppComponent);
 exports.AppComponent = AppComponent;
-var Home = (function () {
-    function Home() {
+var HomeComponent = (function () {
+    function HomeComponent() {
     }
-    return Home;
+    return HomeComponent;
 }());
-Home = __decorate([
+HomeComponent = __decorate([
     core_1.Component({
         selector: 'home',
-        template: ""
+        template: "<h1>THis is home page</h1>"
     })
-], Home);
-exports.Home = Home;
+], HomeComponent);
+exports.HomeComponent = HomeComponent;
 //# sourceMappingURL=app-component.js.map

@@ -14,7 +14,7 @@ import { RegisterModel, LoginModel, Session } from './models/index';
 import { AuthenticationService, AuthComponent } from './auth/index';
 
 //Main application component
-import { AppComponent, Home } from './app-component';
+import { AppComponent, HomeComponent } from './app-component';
 
 //Login components
 import { LoginComponent, LoginDialog, LogoutComponent } from './login/login-component';
@@ -33,13 +33,13 @@ import { StorageService, HttpService } from './shared/index';
 import { HeaderComponent } from './header/index';
 
 //Application Routes
-import { DEMO_APP_ROUTES } from './routes';
+import { APP_ROUTES } from './routes';
 
 @NgModule({
     imports: [
         BrowserModule,
         FormsModule,
-        RouterModule.forRoot(DEMO_APP_ROUTES),
+        RouterModule.forRoot(APP_ROUTES),
         MaterialModule,
         BrowserAnimationsModule
     ],
@@ -55,7 +55,7 @@ import { DEMO_APP_ROUTES } from './routes';
     ],
     declarations: [
         AppComponent,
-        Home,
+        HomeComponent,
         AuthComponent,
         LoginComponent,
         LogoutComponent,
